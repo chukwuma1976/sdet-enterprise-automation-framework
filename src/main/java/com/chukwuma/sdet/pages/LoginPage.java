@@ -10,8 +10,17 @@ public class LoginPage {
 
     private Page page;
 
+    private final Locator usernameInput;
+    private final Locator passwordInput;
+    private final Locator loginButton;
+    private final Locator errorMessage;
+
     public LoginPage(Page page) {
         this.page = page;
+        this.usernameInput = page.locator("input[name='username']");
+        this.passwordInput = page.locator("input[name='password']");
+        this.loginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
+        this.errorMessage = page.locator(".oxd-alert-content-text");
     }
 
     public void navigateToLogin() {
@@ -27,22 +36,8 @@ public class LoginPage {
     }
 
     public void login(String username, String password) {
-
-        Locator usernameField = page.getByPlaceholder("Username");
-        Locator passwordField = page.getByPlaceholder("Password");
-
-        usernameField.fill(username);
-        passwordField.fill(password);
-
-        Locator loginButton = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Login"));
-
-        // Wait explicitly for it to become enabled
-        loginButton.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE));
-
-        page.waitForCondition(() -> loginButton.isEnabled());
-
+        usernameInput.fill(username);
+        passwordInput.fill(password);
         loginButton.click();
     }
 
@@ -52,8 +47,12 @@ public class LoginPage {
         return dashboardHeader.equals("Dashboard");
     }
 
-    public String getLoginErrorMessage() {
-        page.waitForSelector(".oxd-alert-content-text");
-        return page.locator(".oxd-alert-content-text").textContent().trim();
+    public boolean isErrorMessageDisplayed() {
+        errorMessage.waitFor();
+        return true;
+    }
+
+    public String getErrorMessageText() {
+        return errorMessage.textContent().trim();
     }
 }
