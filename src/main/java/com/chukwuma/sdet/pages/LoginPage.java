@@ -32,4 +32,10 @@ public class LoginPage {
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Login")).click();
     }
+
+    public boolean isDashboardVisible() {
+        page.waitForSelector("h6:has-text('Dashboard')");
+        String dashboardHeader = page.locator("header h6").textContent().trim();
+        return dashboardHeader.equals("Dashboard");
+    }
 }
