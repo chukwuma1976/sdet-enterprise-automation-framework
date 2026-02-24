@@ -4,25 +4,26 @@ File structure
 
 sdet-enterprise-automation-framework
 │
-├── ui-tests
-│   ├── playwright
-│   └── selenium
-│
-├── api-tests
-│   └── restassured
-│
-├── database-tests
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com/chukwuma/sdet/
+│   │           ├── pages
+│   │           ├── utilities
+│   │           └── config
+│   │
+│   └── test
+│       └── java
+│           └── com/chukwuma/sdet/
+│               ├── tests
+│               │    ├── ui
+│               │    │    ├── playwright
+│               │    │    └── selenium
+│               │    ├── api
+│               │    └── database
+│               └── base
 │
 ├── test-data
-│
-├── utilities
-│
-├── docs
-│   ├── TestPlan.md
-│   ├── TestStrategy.md
-│   └── DefectReport.md
-│
+├── docs’
 ├── .github/workflows
-│   └── ci-pipeline.yml
-│
 └── pom.xml
