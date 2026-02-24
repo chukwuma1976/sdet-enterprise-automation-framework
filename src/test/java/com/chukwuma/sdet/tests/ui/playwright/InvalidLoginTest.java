@@ -2,22 +2,50 @@ package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.pages.LoginPage;
-import org.junit.jupiter.api.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class InvalidLoginTest extends BaseTest {
 
-    @Test
-    void userCannotLoginWithInvalidCredentials() {
+    @ParameterizedTest
+    @CsvSource({
+            "wrongUser, admin123",
+            "Admin, wrongPass",
+            "wrongUser, wrongPass"
+    })
+    void userCannotLoginWithInvalidCredentials(String username, String password) {
 
         LoginPage loginPage = new LoginPage(page);
 
         loginPage.navigateToLogin();
-        loginPage.login("Admin", "wrongPassword");
+        loginPage.login(username, password);
 
-        Assertions.assertTrue(loginPage.isErrorMessageDisplayed());
-        Assertions.assertEquals(
-                "Invalid credentials",
-                loginPage.getErrorMessageText());
+        loginPage.verifyErrorMessageText("Invalid credentials");
+    }
+
+    @Test
+    void userCannotLoginWhenUsernameBlank() {
+
+        LoginPage loginPage = new LoginPage(page);
+
+        loginPage.navigateToLogin();
+        loginPage.login("", "admin123");
+
+        assertTrue(loginPage.isUsernameRequiredDisplayed());
+    }
+
+    @Test
+    void userCannotLoginWhenPasswordBlank() {
+
+        LoginPage loginPage = new LoginPage(page);
+
+        loginPage.navigateToLogin();
+        loginPage.login("Admin", "");
+
+        assertTrue(loginPage.isPasswordRequiredDisplayed());
     }
 }

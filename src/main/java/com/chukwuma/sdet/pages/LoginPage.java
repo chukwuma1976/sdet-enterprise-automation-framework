@@ -3,8 +3,8 @@ package com.chukwuma.sdet.pages;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.LoadState;
-import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.options.AriaRole;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class LoginPage {
 
@@ -36,6 +36,7 @@ public class LoginPage {
     }
 
     public void login(String username, String password) {
+
         usernameInput.fill(username);
         passwordInput.fill(password);
         loginButton.click();
@@ -47,12 +48,20 @@ public class LoginPage {
         return dashboardHeader.equals("Dashboard");
     }
 
-    public boolean isErrorMessageDisplayed() {
+    public void verifyErrorMessageText(String expectedText) {
         errorMessage.waitFor();
-        return true;
+        assertThat(errorMessage).hasText(expectedText);
     }
 
-    public String getErrorMessageText() {
-        return errorMessage.textContent().trim();
+    public boolean isUsernameRequiredDisplayed() {
+        Locator usernameRequired = page.locator(
+                "input[name='username'] >> xpath=ancestor::div[contains(@class,'oxd-input-group')]//span[text()='Required']");
+        return usernameRequired.isVisible();
+    }
+
+    public boolean isPasswordRequiredDisplayed() {
+        Locator passwordRequired = page.locator(
+                "input[name='password'] >> xpath=ancestor::div[contains(@class,'oxd-input-group')]//span[text()='Required']");
+        return passwordRequired.isVisible();
     }
 }

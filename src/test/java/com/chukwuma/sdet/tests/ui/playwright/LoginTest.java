@@ -16,7 +16,8 @@ public class LoginTest extends BaseTest {
         loginPage.navigateToLogin();
         loginPage.login("Admin", "admin123");
 
-        page.waitForSelector("h6:has-text('Dashboard')");
+        // page.waitForSelector("h6:has-text('Dashboard')");
+        page.waitForURL("**/dashboard/**");
 
         assertTrue(loginPage.isDashboardVisible(), "Dashboard should be visible after login");
     }
