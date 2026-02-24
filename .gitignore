@@ -1,0 +1,43 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IntelliJ / VS Code
+.idea/
+*.iml
+.vscode/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Playwright
+playwright-report/
+test-results/
+screenshots/
+traces/
+
+# Environment files
+.env
+
+# Temporary files
+tmp/
+temp/
+
+# Node (Playwright dependency downloads)
+node_modules/
+
+# Surefire reports
+surefire-reports/
+
+# Mac metadata
+._*
