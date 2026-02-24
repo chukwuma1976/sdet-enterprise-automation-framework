@@ -1,19 +1,12 @@
 package com.chukwuma.sdet.pages;
 
-import com.microsoft.playwright.Locator;
-
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.AriaRole;
 
 public class LoginPage {
 
     private Page page;
-
-    private String usernameInput = "input[name='username']";
-    private String passwordInput = "input[name='password']";
-    private String loginButton = "button[type='submit']";
 
     public LoginPage(Page page) {
         this.page = page;
