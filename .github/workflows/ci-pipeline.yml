@@ -21,14 +21,13 @@ jobs:
         java-version: '17'
         cache: maven
 
-    # ***** THIS IS WHAT YOU WERE MISSING *****
     - name: Setup Node (required by Playwright)
       uses: actions/setup-node@v4
       with:
         node-version: '20'
 
-    - name: Install Maven dependencies
-      run: mvn -B -q -e -DskipTests install
+    - name: Build Project
+      run: mvn -B clean package -DskipTests
 
     - name: Install Playwright Browsers
       run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
