@@ -1,4 +1,4 @@
-name: CI - Build and Test
+name: Playwright Tests
 
 on:
   push:
@@ -11,24 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: maven
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven
+    # ***** THIS IS WHAT YOU WERE MISSING *****
+    - name: Setup Node (required by Playwright)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-      - name: Install Playwright Browsers
-        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
+    - name: Install Maven dependencies
+      run: mvn -B -q -e -DskipTests install
 
-      - name: Run Tests
-        run: mvn clean test
+    - name: Install Playwright Browsers
+      run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
+
+    - name: Run Tests
+      run: mvn test
