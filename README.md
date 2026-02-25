@@ -1,46 +1,72 @@
-# SDET Enterprise Automation Framework
+# Enterprise SDET Automation Framework (Playwright + Java)
 
-# Enterprise Test Automation Framework
+A production-style UI automation framework built to simulate how automated testing is structured inside a real enterprise QA organization.
 
-This project is a Java-based end-to-end test automation framework built to simulate how UI automation is implemented in a real enterprise QA environment.
+This project demonstrates scalable, maintainable test automation using modern tooling and CI-driven execution.
 
 The framework automates the OrangeHRM demo application:
 https://opensource-demo.orangehrmlive.com
 
-It demonstrates scalable UI test design using the Page Object Model, reusable test setup, and continuous integration execution through GitHub Actions.
+## This repository is not a tutorial project.
 
-## Technologies
+It represents how a QA engineering team designs automation for:
 
-* Java 17
-* Playwright (UI Automation)
-* JUnit 5 (Test Runner)
-* Maven (Build Management)
-* GitHub Actions (CI Pipeline)
+* reliability
+* maintainability
+* scalability
+* CI integration
+* deterministic test execution (no flaky behavior)
 
-## What This Project Demonstrates
+The focus is on architecture and synchronization strategy — not just making tests pass.
 
-* Automated regression testing
-* Page Object Model design pattern
-* Cross-browser UI testing
+## What This Framework Demonstrates
+
+* Page Object Model (POM) architecture
+* Parameterized test execution (JUnit 5)
+* Positive and negative authentication validation
+* Explicit synchronization to prevent flaky UI tests
+* Cross-browser execution support
 * Headless execution in CI environments
-* Continuous Integration pipeline configuration
+* Maven-based build lifecycle
+* GitHub Actions CI pipeline integration
 
-![CI](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
+## Technology Stack
 
-Java + Playwright + JUnit5 + Maven automation framework with GitHub Actions continuous integration.
-Runs UI tests automatically on every push.
+```text
+| Area           | Technology        |
+| -------------- | ----------------- |
+| Language       | Java 17           |
+| UI Automation  | Playwright (Java) |
+| Test Runner    | JUnit 5           |
+| Build Tool     | Maven             |
+| CI/CD          | GitHub Actions    |
+| Design Pattern | Page Object Model |
+```
+
+## Running the Test Suite
+
+Clone the repository and execute:
+`mvn clean test`
+
+The suite runs automated login scenarios including:
+
+* Valid authentication
+* Invalid credentials
+* Required field validation
+* Negative login coverage
 
 # File structure
 
+```text
 sdet-enterprise-automation-framework
 │
 ├── src
 │   ├── main
 │   │   └── java
 │   │       └── com/chukwuma/sdet/
-│   │           ├── pages
-│   │           ├── utilities
-│   │           └── config
+│   │           ├── pages        → Page Objects (application behavior)
+│   │           ├── utilities    → Reusable helpers
+│   │           └── config       → Environment configuration
 │   │
 │   └── test
 │       └── java
@@ -51,9 +77,31 @@ sdet-enterprise-automation-framework
 │               │    │    └── selenium
 │               │    ├── api
 │               │    └── database
-│               └── base
+│               └── base          → Browser setup & teardown
 │
 ├── test-data
 ├── docs
 ├── .github/workflows
 └── pom.xml
+```
+
+## Engineering Approach
+
+The framework prioritizes:
+
+* Clear separation of concerns
+* Reusable browser lifecycle management
+* Stable element synchronization strategies
+* Scalable test organization for future API and database automation
+* CI validation on every push
+
+This repository serves as a foundation for expanding into:
+
+* API automation
+* Test reporting
+* Parallel execution
+* Containerized test execution
+
+## Author
+Built and maintained by Chukwuma Anyadike
+SDET | Java | Automation Engineering | CI/CD
