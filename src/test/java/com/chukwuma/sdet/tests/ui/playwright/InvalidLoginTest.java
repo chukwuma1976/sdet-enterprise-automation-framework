@@ -1,32 +1,37 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
+import com.chukwuma.sdet.models.LoginData;
+import com.chukwuma.sdet.models.User;
 import com.chukwuma.sdet.pages.LoginPage;
+import com.chukwuma.sdet.utils.TestDataLoader;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class InvalidLoginTest extends BaseTest {
 
     @ParameterizedTest
-    @CsvSource({
-            "wrongUser, admin123",
-            "Admin, wrongPass",
-            "wrongUser, wrongPass"
-    })
+    @MethodSource("invalidUserProvider")
     @DisplayName("User cannot login with invalid credentials")
-    void userCannotLoginWithInvalidCredentials(String username, String password) {
+    void userCannotLoginWithInvalidCredentials(User user) {
 
         LoginPage loginPage = new LoginPage(page);
-
         loginPage.navigateToLogin();
-        loginPage.login(username, password);
+        loginPage.login(user.username, user.password);
 
         loginPage.verifyErrorMessageText("Invalid credentials");
+    }
+
+    static Stream<User> invalidUserProvider() {
+        LoginData data = TestDataLoader.loadLoginData();
+        return data.invalidUsers.stream();
     }
 
     @Test
