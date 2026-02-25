@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginTest extends BaseTest {
+import org.junit.jupiter.api.DisplayName;
+
+public class SuccessfulLoginTest extends BaseTest {
 
     @Test
-    void userCanLogin() {
+    @DisplayName("User can login with valid credentials")
+    void userCanLoginWithValidCredentials() {
 
         LoginPage loginPage = new LoginPage(page);
 

@@ -5,6 +5,7 @@ import com.chukwuma.sdet.pages.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,6 +18,7 @@ public class InvalidLoginTest extends BaseTest {
             "Admin, wrongPass",
             "wrongUser, wrongPass"
     })
+    @DisplayName("User cannot login with invalid credentials")
     void userCannotLoginWithInvalidCredentials(String username, String password) {
 
         LoginPage loginPage = new LoginPage(page);
@@ -28,6 +30,7 @@ public class InvalidLoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("User cannot login when username is blank")
     void userCannotLoginWhenUsernameBlank() {
 
         LoginPage loginPage = new LoginPage(page);
@@ -39,6 +42,7 @@ public class InvalidLoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("User cannot login when password is blank")
     void userCannotLoginWhenPasswordBlank() {
 
         LoginPage loginPage = new LoginPage(page);
