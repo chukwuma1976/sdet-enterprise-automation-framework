@@ -53,24 +53,40 @@ sdet-enterprise-automation-framework
 │   ├── main
 │   │   └── java
 │   │       └── com/chukwuma/sdet/
-│   │           ├── pages        → Page Objects (application behavior)
-│   │           ├── utilities    → Reusable helpers
-│   │           └── config       → Environment configuration
+│   │           ├── pages              → Page Objects (UI behavior)
+│   │           ├── config             → Config readers & environment setup
+│   │           └── utilities          → Shared reusable helpers
 │   │
 │   └── test
-│       └── java
-│           └── com/chukwuma/sdet/
-│               ├── tests
-│               │    ├── ui
-│               │    │    ├── playwright
-│               │    │    └── selenium
-│               │    ├── api
-│               │    └── database
-│               └── base          → Browser setup & teardown
+│       ├── java
+│       │   └── com/chukwuma/sdet/
+│       │       ├── base               → BaseTest (browser setup/teardown)
+│       │       ├── models             → Test data models (POJOs)
+│       │       │     ├── LoginData.java
+│       │       │     └── User.java
+│       │       │
+│       │       ├── utils              → Test utilities (data loaders, helpers)
+│       │       │     └── TestDataLoader.java
+│       │       │
+│       │       └── tests
+│       │            ├── ui
+│       │            │    ├── playwright
+│       │            │    │     ├── SuccessfulLoginTest.java
+│       │            │    │     └── InvalidLoginTest.java
+│       │            │    │
+│       │            │    └── selenium
+│       │            │
+│       │            ├── api
+│       │            └── database
+│       │
+│       └── resources
+│            ├── config.properties
+│            └── testdata
+│                  └── loginData.json
 │
-├── test-data
-├── docs
-├── .github/workflows
+├── test-data                         → Optional external datasets (future expansion)
+├── docs                              → Architecture notes & documentation
+├── .github/workflows                 → CI/CD pipelines
 └── pom.xml
 ```
 
