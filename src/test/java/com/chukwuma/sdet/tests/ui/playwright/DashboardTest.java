@@ -20,8 +20,6 @@ public class DashboardTest extends BaseTest {
         String username = ConfigReader.get("APP_USERNAME");
         String password = ConfigReader.get("APP_PASSWORD");
         String baseUrl = ConfigReader.get("BASE_URL");
-        System.out.println("username: " + username);
-        System.out.println("password" + password);
 
         page.navigate(baseUrl);
 
