@@ -26,7 +26,7 @@ public class LoginPage {
 
     public void navigateToLogin() {
 
-        page.navigate(ConfigReader.get("baseUrl"));
+        page.navigate(ConfigReader.get("BASE_URL"));
 
         // Wait for the actual login form (not just DOM)
         page.waitForSelector("input[name='username']");
