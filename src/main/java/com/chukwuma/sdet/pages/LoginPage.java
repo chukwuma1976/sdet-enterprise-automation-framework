@@ -5,6 +5,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.AriaRole;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import com.chukwuma.sdet.config.ConfigReader;
 
 public class LoginPage {
 
@@ -25,7 +26,7 @@ public class LoginPage {
 
     public void navigateToLogin() {
 
-        page.navigate("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        page.navigate(ConfigReader.get("BASE_URL"));
 
         // Wait for the actual login form (not just DOM)
         page.waitForSelector("input[name='username']");

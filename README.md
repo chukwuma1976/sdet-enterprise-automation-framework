@@ -51,42 +51,46 @@ sdet-enterprise-automation-framework
 │
 ├── src
 │   ├── main
-│   │   └── java
-│   │       └── com/chukwuma/sdet/
-│   │           ├── pages              → Page Objects (UI behavior)
-│   │           ├── config             → Config readers & environment setup
-│   │           └── utilities          → Shared reusable helpers
+│   │   ├── java
+│   │   │   └── com/chukwuma/sdet/
+│   │   │       ├── config
+│   │   │       │     └── ConfigReader.java
+│   │   │       │
+│   │   │       ├── pages
+│   │   │       │     └── LoginPage.java
+│   │   │       │
+│   │   │       └── utilities
+│   │   │
+│   │   └── resources
+│   │        └── config.properties
 │   │
 │   └── test
 │       ├── java
 │       │   └── com/chukwuma/sdet/
-│       │       ├── base               → BaseTest (browser setup/teardown)
-│       │       ├── models             → Test data models (POJOs)
+│       │       ├── base
+│       │       │     └── BaseTest.java
+│       │       │
+│       │       ├── models
 │       │       │     ├── LoginData.java
 │       │       │     └── User.java
 │       │       │
-│       │       ├── utils              → Test utilities (data loaders, helpers)
+│       │       ├── utils
 │       │       │     └── TestDataLoader.java
 │       │       │
 │       │       └── tests
 │       │            ├── ui
-│       │            │    ├── playwright
-│       │            │    │     ├── SuccessfulLoginTest.java
-│       │            │    │     └── InvalidLoginTest.java
-│       │            │    │
-│       │            │    └── selenium
+│       │            │     └── LoginTest.java
 │       │            │
 │       │            ├── api
 │       │            └── database
 │       │
 │       └── resources
-│            ├── config.properties
 │            └── testdata
-│                  └── loginData.json
+│                 └── loginData.json
 │
-├── test-data                         → Optional external datasets (future expansion)
-├── docs                              → Architecture notes & documentation
-├── .github/workflows                 → CI/CD pipelines
+├── test-data
+├── docs
+├── .github/workflows
 └── pom.xml
 ```
 
@@ -106,6 +110,12 @@ The framework prioritizes:
 * Test reporting
 * Parallel execution
 * Containerized test execution
+
+## Configuration Management
+
+This framework externalizes environment configuration using a centralized ConfigReader utility.
+Configuration values are loaded from config.properties and may be overridden using environment variables.
+This enables seamless switching between development, staging, and production environments.
 
 ## Author
 
