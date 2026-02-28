@@ -28,7 +28,13 @@ public class EmployeePage {
                 new Page.GetByRoleOptions().setName("Employee List")).click();
     }
 
-    public void addEmployee(String firstName, String lastName) {
+    public void enterEmployeeId(String employeeId) {
+        page.locator(".oxd-input-group:has(label:has-text('Employee Id'))")
+                .locator("input")
+                .fill(employeeId);
+    }
+
+    public void addEmployee(String firstName, String lastName, String employeeId) {
 
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("First Name"))
@@ -37,6 +43,8 @@ public class EmployeePage {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Last Name"))
                 .fill(lastName);
+
+        enterEmployeeId(employeeId);
 
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save"))
@@ -70,14 +78,25 @@ public class EmployeePage {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
-    public void searchByNameWithoutSelecting(String fullName) {
+    // public void searchByNameWithoutSelecting(String fullName) {
 
-        Locator searchBox = page
-                .getByRole(AriaRole.TEXTBOX,
-                        new Page.GetByRoleOptions().setName("Type for hints..."))
-                .first();
+    // Locator searchBox = page
+    // .getByRole(AriaRole.TEXTBOX,
+    // new Page.GetByRoleOptions().setName("Type for hints..."))
+    // .first();
 
-        searchBox.fill(fullName);
+    // searchBox.fill(fullName);
+
+    // page.getByRole(AriaRole.BUTTON,
+    // new Page.GetByRoleOptions().setName("Search"))
+    // .click();
+
+    // page.waitForLoadState(LoadState.NETWORKIDLE);
+    // }
+
+    public void searchByEmployeeIdAndSelect(String employeeId) {
+
+        enterEmployeeId(employeeId);
 
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Search"))
@@ -86,10 +105,10 @@ public class EmployeePage {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
-    public void deleteEmployee(String fullName) {
+    public void deleteEmployee(String employeeId) {
 
         Locator row = page.getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(fullName));
+                .filter(new Locator.FilterOptions().setHasText(employeeId));
 
         row.locator("button:has(.bi-trash)").click();
 

@@ -2,12 +2,7 @@ package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.config.ConfigReader;
-import com.chukwuma.sdet.models.LoginData;
-import com.chukwuma.sdet.models.User;
-import com.chukwuma.sdet.pages.DashboardPage;
 import com.chukwuma.sdet.pages.LoginPage;
-import com.chukwuma.sdet.utils.TestDataLoader;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
