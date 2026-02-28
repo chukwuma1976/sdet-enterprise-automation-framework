@@ -26,22 +26,29 @@ public abstract class BaseTest {
     @BeforeEach
     void createContext() {
 
-        context = browser.newContext();
+        context = browser.newContext(); // 🔹 Isolation happens here
         page = context.newPage();
+
         page.setDefaultTimeout(60000);
     }
 
     @AfterEach
     void closeContext() {
-        if (context != null)
-            context.close();
+
+        if (context != null) {
+            context.close(); // 🔹 Critical for parallel safety
+        }
     }
 
     @AfterAll
     void closeBrowser() {
-        if (browser != null)
+
+        if (browser != null) {
             browser.close();
-        if (playwright != null)
+        }
+
+        if (playwright != null) {
             playwright.close();
+        }
     }
 }

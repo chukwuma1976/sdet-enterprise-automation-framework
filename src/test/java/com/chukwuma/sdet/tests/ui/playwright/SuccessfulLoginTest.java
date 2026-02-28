@@ -1,11 +1,8 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
-import com.chukwuma.sdet.models.LoginData;
-import com.chukwuma.sdet.models.User;
+import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.pages.LoginPage;
-import com.chukwuma.sdet.utils.TestDataLoader;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,11 +17,13 @@ public class SuccessfulLoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(page);
 
-        loginPage.navigateToLogin();
-        LoginData data = TestDataLoader.loadLoginData();
-        User validUser = data.validUser;
+        String username = ConfigReader.get("APP_USERNAME");
+        String password = ConfigReader.get("APP_PASSWORD");
+        String baseUrl = ConfigReader.get("BASE_URL");
 
-        loginPage.login(validUser.username, validUser.password);
+        page.navigate(baseUrl);
+
+        loginPage.login(username, password);
 
         page.waitForURL("**/dashboard/**");
 

@@ -13,7 +13,6 @@ public class DashboardTest extends BaseTest {
     @Test
     void shouldDisplayDashboardAfterSuccessfulLogin() {
 
-        // Arrange
         LoginPage loginPage = new LoginPage(page);
         DashboardPage dashboardPage = new DashboardPage(page);
 
@@ -23,11 +22,8 @@ public class DashboardTest extends BaseTest {
 
         page.navigate(baseUrl);
 
-        // Act
         loginPage.login(username, password);
-        page.waitForURL("**/dashboard/**");
 
-        // Assert
         assertTrue(
                 dashboardPage.isLoaded(),
                 "Dashboard should be visible after successful login");
