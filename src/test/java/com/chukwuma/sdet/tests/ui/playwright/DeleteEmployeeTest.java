@@ -5,12 +5,21 @@ import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.pages.EmployeePage;
 import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataFactory;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 
+@Tag("ui")
+@Epic("Employee UI Tests")
+@Feature("CRUD operations on Employees")
 class DeleteEmployeeTest extends BaseTest {
 
     @BeforeEach
@@ -22,6 +31,7 @@ class DeleteEmployeeTest extends BaseTest {
     }
 
     @Test
+    @Description("Delete an existing employee")
     void shouldDeleteEmployeeSuccessfully() {
 
         String firstName = TestDataFactory.generateUniqueFirstName();

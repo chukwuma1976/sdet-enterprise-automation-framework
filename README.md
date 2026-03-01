@@ -1,4 +1,5 @@
 # 🚀 Enterprise Test Automation Framework
+![CI Pipeline](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
 
 ## Playwright (Java) | JUnit 5 | CI/CD | Parallel-Ready
 
@@ -131,10 +132,6 @@ CI Pipeline Steps:
 5. Execute in headless mode
 6. Fail pipeline if tests fail
 
-CI Badge: 
-
-![Playwright Tests](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
-
 # 📁 Project Structure
 
 ```text
@@ -188,8 +185,13 @@ This is not a tutorial project.
 * Scalable project structure
 * Clean separation of concerns
 
-#👤 Author
-##Chukwuma Anyadike
+## 📊 Test Report
+
+Live Allure Report:
+https://chukwuma1976.github.io/sdet-enterprise-automation-framework
+
+# 👤 Author
+## Chukwuma Anyadike
 Software Development Engineer in Test (SDET)
 
 Automation Engineering | Playwright | Java | CI/CD | Parallel Architecture | API & UI Testing
