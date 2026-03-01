@@ -20,3 +20,9 @@ trace.zip
 
 # Node (Playwright Java uses Node internally)
 node_modules/
+
+# Allure
+.allure/
+allure-results/
+allure-report/
+target/

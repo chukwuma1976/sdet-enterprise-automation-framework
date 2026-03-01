@@ -6,6 +6,10 @@ import com.chukwuma.sdet.models.User;
 import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataLoader;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
@@ -15,11 +19,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+@Epic("Employee UI Tests")
+@Feature("Invalid Login")
 public class InvalidLoginTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("invalidUserProvider")
     @DisplayName("User cannot login with invalid credentials")
+    @Description("Verify that users cannot login with invalid username and password combinations")
     void userCannotLoginWithInvalidCredentials(User user) {
 
         LoginPage loginPage = new LoginPage(page);
@@ -36,6 +43,7 @@ public class InvalidLoginTest extends BaseTest {
 
     @Test
     @DisplayName("User cannot login when username is blank")
+    @Description("Verify that users cannot login when the username field is left blank")
     void userCannotLoginWhenUsernameBlank() {
 
         LoginPage loginPage = new LoginPage(page);
@@ -48,6 +56,7 @@ public class InvalidLoginTest extends BaseTest {
 
     @Test
     @DisplayName("User cannot login when password is blank")
+    @Description("Verify that users cannot login when the password field is left blank")
     void userCannotLoginWhenPasswordBlank() {
 
         LoginPage loginPage = new LoginPage(page);

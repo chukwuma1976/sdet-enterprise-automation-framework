@@ -188,8 +188,8 @@ This is not a tutorial project.
 * Scalable project structure
 * Clean separation of concerns
 
-#👤 Author
-##Chukwuma Anyadike
+# 👤 Author
+## Chukwuma Anyadike
 Software Development Engineer in Test (SDET)
 
 Automation Engineering | Playwright | Java | CI/CD | Parallel Architecture | API & UI Testing

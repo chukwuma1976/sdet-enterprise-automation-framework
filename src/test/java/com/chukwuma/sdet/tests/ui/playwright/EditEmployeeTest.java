@@ -11,6 +11,12 @@ import com.chukwuma.sdet.pages.EmployeePage;
 import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataFactory;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
+@Epic("Employee UI Tests")
+@Feature("CRUD operations on Employees")
 public class EditEmployeeTest extends BaseCrudTest {
 
     @BeforeEach
@@ -22,6 +28,7 @@ public class EditEmployeeTest extends BaseCrudTest {
     }
 
     @Test
+    @Description("Edit an existing employee's details")
     void shouldEditEmployeeSuccessfully() {
 
         String firstName = TestDataFactory.generateUniqueFirstName();
