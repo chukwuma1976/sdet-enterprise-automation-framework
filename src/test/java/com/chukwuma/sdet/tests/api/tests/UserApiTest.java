@@ -10,8 +10,12 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Tag;
+
 import static com.chukwuma.sdet.tests.api.specs.ResponseSpecs.*;
 
+@Tag("api")
 @Epic("User API Tests")
 @Feature("CRUD operations on Users")
 public class UserApiTest extends BaseApiTest {

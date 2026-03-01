@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 
+@Tag("ui")
 @Epic("Employee UI Tests")
 @Feature("CRUD operations on Employees")
 class DeleteEmployeeTest extends BaseTest {

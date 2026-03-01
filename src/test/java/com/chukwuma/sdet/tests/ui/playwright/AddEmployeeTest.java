@@ -3,6 +3,7 @@ package com.chukwuma.sdet.tests.ui.playwright;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.base.BaseCrudTest;
@@ -15,6 +16,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
+@Tag("ui")
 @Epic("Employee UI Tests")
 @Feature("CRUD operations on Employees")
 class AddEmployeeTest extends BaseCrudTest {

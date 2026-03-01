@@ -13,6 +13,9 @@ import com.chukwuma.sdet.config.ConfigReader;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Tag;
+
+@Tag("ui")
 @Epic("Employee UI Tests")
 @Feature("Dashboard Display")
 public class DashboardTest extends BaseTest {
