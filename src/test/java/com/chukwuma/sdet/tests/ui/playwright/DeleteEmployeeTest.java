@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
 @Tag("ui")
@@ -31,6 +32,7 @@ class DeleteEmployeeTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("User can delete an existing employee")
     @Description("Delete an existing employee")
     void shouldDeleteEmployeeSuccessfully() {
 

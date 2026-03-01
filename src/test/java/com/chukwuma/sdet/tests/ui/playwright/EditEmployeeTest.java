@@ -3,6 +3,7 @@ package com.chukwuma.sdet.tests.ui.playwright;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,7 @@ public class EditEmployeeTest extends BaseCrudTest {
     }
 
     @Test
+    @DisplayName("Edit Employee Details")
     @Description("Edit an existing employee's details")
     void shouldEditEmployeeSuccessfully() {
 

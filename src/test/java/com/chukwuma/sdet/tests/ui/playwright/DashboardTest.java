@@ -13,6 +13,7 @@ import com.chukwuma.sdet.config.ConfigReader;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
 @Tag("ui")
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Tag;
 public class DashboardTest extends BaseTest {
 
     @Test
+    @DisplayName("Dashboard is displayed after successful login")
     @Description("Dashboard should be displayed after successful login")
     void shouldDisplayDashboardAfterSuccessfulLogin() {
 
