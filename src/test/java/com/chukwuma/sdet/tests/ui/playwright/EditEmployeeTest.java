@@ -1,17 +1,17 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
-import com.chukwuma.sdet.base.BaseTest;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.chukwuma.sdet.base.BaseCrudTest;
 import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.pages.EmployeePage;
 import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataFactory;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
-
-class DeleteEmployeeTest extends BaseTest {
+public class EditEmployeeTest extends BaseCrudTest {
 
     @BeforeEach
     void login() {
@@ -22,11 +22,12 @@ class DeleteEmployeeTest extends BaseTest {
     }
 
     @Test
-    void shouldDeleteEmployeeSuccessfully() {
+    void shouldEditEmployeeSuccessfully() {
 
         String firstName = TestDataFactory.generateUniqueFirstName();
+        String middleName = TestDataFactory.generateUniqueMiddleName(); // New middle name for editing
         String lastName = TestDataFactory.generateUniqueLastName();
-        String employeeId = TestDataFactory.generateEmployeeId();
+        employeeId = TestDataFactory.generateEmployeeId();
 
         EmployeePage employeePage = new EmployeePage(page);
 
@@ -36,10 +37,12 @@ class DeleteEmployeeTest extends BaseTest {
 
         employeePage.goToEmployeeList();
         employeePage.searchByEmployeeIdAndSelect(employeeId);
+        employeePage.editEmployee(employeeId);
 
-        employeePage.deleteEmployee(employeeId);
-        employeePage.searchByEmployeeIdAndSelect(employeeId);
+        employeePage.addMiddleNameAndSave(middleName); // Add middle name to edit the employee
 
-        assertTrue(employeePage.isNoRecordsFoundVisible());
+        assertTrue(
+                employeePage.isMiddleNamePersisted(middleName),
+                "Expected middle name to be saved correctly");
     }
 }
