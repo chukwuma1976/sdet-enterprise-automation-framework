@@ -4,6 +4,7 @@ import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
 import com.chukwuma.sdet.utils.TestDataFactory;
+import com.microsoft.playwright.options.LoadState;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -11,8 +12,7 @@ import io.qameta.allure.Feature;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -46,8 +46,11 @@ class DeleteEmployeeTest extends BaseTest {
         employeePage.searchByEmployeeIdAndSelect(employeeId);
 
         employeePage.deleteEmployee(employeeId);
+
+        employeePage.goToEmployeeList();
         employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        assertTrue(employeePage.isNoRecordsFoundVisible());
+        assertFalse(employeePage.recordsContainEmployee(employeeId),
+                "Expected employee with ID " + employeeId + " to be deleted");
     }
 }

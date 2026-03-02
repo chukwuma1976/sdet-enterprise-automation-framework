@@ -1,5 +1,6 @@
 package com.chukwuma.sdet.pages.dashboard;
 
+import com.chukwuma.sdet.config.ConfigReader;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -19,8 +20,6 @@ public class DashboardPage {
     }
 
     public void logout() {
-
-        page.waitForURL("**/dashboard/**");
 
         // Click the user dropdown icon directly
         page.locator(".oxd-userdropdown-icon").click();
@@ -58,5 +57,36 @@ public class DashboardPage {
 
     public boolean isOnExpectedQuickLaunchPage(QuickLaunchOption option) {
         return page.url().contains(option.getUrlFragment());
+    }
+
+    public void navigateToAdminPage() {
+        page.navigate(ConfigReader.get("ADMIN_URL"));
+        page.waitForURL("**/admin/viewSystemUsers");
+    }
+
+    public boolean isAdminAccessBlocked() {
+        Locator alertLocator = page.getByRole(AriaRole.ALERT);
+        alertLocator.waitFor();
+        /*
+         * Check if the alert contains "Credential Required" text or if we're still on
+         * the dashboard
+         */
+        return page.url().contains("/dashboard")
+                || alertLocator.filter(new Locator.FilterOptions()
+                        .setHasText("Credential Required"))
+                        .isVisible();
+    }
+
+    public void clickAdminModuleButton() {
+        page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Admin")).click();
+        page.waitForURL("**/admin/viewSystemUsers");
+    }
+
+    public boolean isAdminModuleAccessible() {
+        Locator heading = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("System Users"));
+        heading.waitFor();
+        return heading.isVisible();
     }
 }

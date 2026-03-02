@@ -7,171 +7,177 @@ import com.microsoft.playwright.options.LoadState;
 
 public class EmployeePage {
 
-    private final Page page;
+        private final Page page;
 
-    public EmployeePage(Page page) {
-        this.page = page;
-    }
+        public EmployeePage(Page page) {
+                this.page = page;
+        }
 
-    public void goToPim() {
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName("PIM")).click();
-    }
+        public void goToPim() {
+                page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("PIM")).click();
+        }
 
-    public void goToAddEmployee() {
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName("Add Employee")).click();
-    }
+        public void goToAddEmployee() {
+                page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("Add Employee")).click();
+        }
 
-    public void goToEmployeeList() {
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName("Employee List")).click();
-    }
+        public void goToEmployeeList() {
+                page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("Employee List")).click();
+        }
 
-    public void enterEmployeeId(String employeeId) {
-        page.locator(".oxd-input-group:has(label:has-text('Employee Id'))")
-                .locator("input")
-                .fill(employeeId);
-    }
+        public void enterEmployeeId(String employeeId) {
+                page.locator(".oxd-input-group:has(label:has-text('Employee Id'))")
+                                .locator("input")
+                                .fill(employeeId);
+        }
 
-    public void addEmployee(String firstName, String lastName, String employeeId) {
+        public void addEmployee(String firstName, String lastName, String employeeId) {
 
-        page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("First Name"))
-                .fill(firstName);
+                addEmployeeWithOutSave(firstName, lastName, employeeId);
 
-        page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Last Name"))
-                .fill(lastName);
+                page.getByRole(AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Save"))
+                                .click();
 
-        enterEmployeeId(employeeId);
+                page.waitForURL("**/viewPersonalDetails/**");
+        }
 
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Save"))
-                .click();
+        public void addEmployeeWithOutSave(String firstName, String lastName, String employeeId) {
 
-        page.waitForURL("**/viewPersonalDetails/**");
-    }
+                page.getByRole(AriaRole.TEXTBOX,
+                                new Page.GetByRoleOptions().setName("First Name"))
+                                .fill(firstName);
 
-    public void addMiddleNameAndSave(String middleName) {
+                page.getByRole(AriaRole.TEXTBOX,
+                                new Page.GetByRoleOptions().setName("Last Name"))
+                                .fill(lastName);
 
-        Locator middleNameInput = page.locator("input[name='middleName']");
+                enterEmployeeId(employeeId);
+        }
 
-        // Wait until truly ready
-        middleNameInput.waitFor();
+        public void addMiddleNameAndSave(String middleName) {
 
-        // Extra safety: ensure editable
-        page.waitForCondition(() -> middleNameInput.isVisible() &&
-                middleNameInput.isEnabled());
+                Locator middleNameInput = page.locator("input[name='middleName']");
 
-        // Click first to focus
-        middleNameInput.click();
+                // Wait until truly ready
+                middleNameInput.waitFor();
 
-        // Clear in case anything exists
-        middleNameInput.fill("");
+                // Extra safety: ensure editable
+                page.waitForCondition(() -> middleNameInput.isVisible() &&
+                                middleNameInput.isEnabled());
 
-        // Now fill
-        middleNameInput.fill(middleName);
+                // Click first to focus
+                middleNameInput.click();
 
-        // Click correct Save (top one)
-        page.locator("form")
-                .filter(new Locator.FilterOptions()
-                        .setHas(middleNameInput))
-                .getByRole(AriaRole.BUTTON,
-                        new Locator.GetByRoleOptions().setName("Save"))
-                .click();
+                // Clear in case anything exists
+                middleNameInput.fill("");
 
-        page.getByText("Successfully Updated").waitFor();
-    }
+                // Now fill
+                middleNameInput.fill(middleName);
 
-    public void searchAndSelectEmployee(String fullName) {
+                // Click correct Save (top one)
+                page.locator("form")
+                                .filter(new Locator.FilterOptions()
+                                                .setHas(middleNameInput))
+                                .getByRole(AriaRole.BUTTON,
+                                                new Locator.GetByRoleOptions().setName("Save"))
+                                .click();
 
-        Locator searchBox = page
-                .getByRole(AriaRole.TEXTBOX,
-                        new Page.GetByRoleOptions().setName("Type for hints..."))
-                .first();
+                page.getByText("Successfully Updated").waitFor();
+        }
 
-        searchBox.fill(fullName);
+        public void searchAndSelectEmployee(String fullName) {
 
-        Locator listbox = page.getByRole(AriaRole.LISTBOX);
-        listbox.waitFor();
+                Locator searchBox = page
+                                .getByRole(AriaRole.TEXTBOX,
+                                                new Page.GetByRoleOptions().setName("Type for hints..."))
+                                .first();
 
-        Locator option = listbox
-                .getByRole(AriaRole.OPTION)
-                .filter(new Locator.FilterOptions().setHasText(fullName));
+                searchBox.fill(fullName);
 
-        option.click();
+                Locator listbox = page.getByRole(AriaRole.LISTBOX);
+                listbox.waitFor();
 
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Search"))
-                .click();
+                Locator option = listbox
+                                .getByRole(AriaRole.OPTION)
+                                .filter(new Locator.FilterOptions().setHasText(fullName));
 
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-    }
+                option.click();
 
-    public void searchByEmployeeIdAndSelect(String employeeId) {
+                page.getByRole(AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Search"))
+                                .click();
 
-        enterEmployeeId(employeeId);
+                page.waitForLoadState(LoadState.NETWORKIDLE);
+        }
 
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Search"))
-                .click();
+        public void searchByEmployeeIdAndSelect(String employeeId) {
 
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-    }
+                enterEmployeeId(employeeId);
 
-    public void editEmployee(String employeeId) {
+                page.getByRole(AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Search"))
+                                .click();
 
-        Locator row = page.getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(employeeId));
+                page.waitForLoadState(LoadState.NETWORKIDLE);
 
-        row.locator("button:has(.bi-pencil-fill)").click();
+                Locator recordsContainerLocator = page.locator(".orangehrm-paper-container");
+                recordsContainerLocator.waitFor();
+        }
 
-        page.waitForURL("**/viewPersonalDetails/**");
-    }
+        public boolean recordsContainEmployee(String employeeId) {
 
-    public void deleteEmployee(String employeeId) {
+                Locator rows = page.getByRole(AriaRole.ROW)
+                                .filter(new Locator.FilterOptions().setHasText(employeeId));
 
-        Locator row = page.getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(employeeId));
+                return rows.count() > 0;
+        }
 
-        row.locator("button:has(.bi-trash)").click();
+        public void editEmployee(String employeeId) {
 
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Yes, Delete"))
-                .click();
+                Locator row = page.getByRole(AriaRole.ROW)
+                                .filter(new Locator.FilterOptions().setHasText(employeeId));
 
-        // 🔴 IMPORTANT — wait for success toast
-        page.getByText("Successfully Deleted").waitFor();
+                row.locator("button:has(.bi-pencil-fill)").click();
 
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-    }
+                page.waitForURL("**/viewPersonalDetails/**");
+        }
 
-    public boolean isEmployeePresent(String fullName) {
+        public void deleteEmployee(String employeeId) {
 
-        Locator row = page.getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(fullName));
+                Locator row = page.getByRole(AriaRole.ROW)
+                                .filter(new Locator.FilterOptions().setHasText(employeeId));
 
-        row.first().waitFor();
+                row.locator("button:has(.bi-trash)").click();
 
-        return row.count() > 0;
-    }
+                page.getByRole(AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Yes, Delete"))
+                                .click();
 
-    public boolean isMiddleNamePersisted(String expectedMiddleName) {
+                // 🔴 IMPORTANT — wait for success toast
+                page.getByText("Successfully Deleted").waitFor();
 
-        Locator middleNameInput = page
-                .locator("input[name='middleName']");
+                page.waitForLoadState(LoadState.NETWORKIDLE);
+        }
 
-        middleNameInput.waitFor();
+        public boolean isMiddleNamePersisted(String expectedMiddleName) {
 
-        String actualValue = middleNameInput.inputValue();
+                Locator middleNameInput = page
+                                .locator("input[name='middleName']");
 
-        return expectedMiddleName.equals(actualValue);
-    }
+                middleNameInput.waitFor();
 
-    public boolean isNoRecordsFoundVisible() {
-        Locator recordsNotFound = page.locator(".orangehrm-paper-container").getByText("No Records Found");
-        recordsNotFound.waitFor();
-        return recordsNotFound.isVisible();
-    }
+                String actualValue = middleNameInput.inputValue();
+
+                return expectedMiddleName.equals(actualValue);
+        }
+
+        public boolean isNoRecordsFoundVisible() {
+                Locator recordsContainerLocator = page.locator(".orangehrm-paper-container");
+                recordsContainerLocator.waitFor();
+                return recordsContainerLocator.textContent().contains("No Records Found");
+        }
 }

@@ -1,5 +1,6 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,6 @@ class AddEmployeeTest extends BaseCrudTest {
 
         String firstName = TestDataFactory.generateUniqueFirstName();
         String lastName = TestDataFactory.generateUniqueLastName();
-        String fullName = firstName + " " + lastName;
         employeeId = TestDataFactory.generateEmployeeId();
 
         EmployeePage employeePage = new EmployeePage(page);
@@ -43,11 +43,10 @@ class AddEmployeeTest extends BaseCrudTest {
         employeePage.addEmployee(firstName, lastName, employeeId);
 
         employeePage.goToEmployeeList();
-        employeePage.searchAndSelectEmployee(fullName);
+        employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        assertTrue(
-                employeePage.isEmployeePresent(fullName),
-                "Expected employee " + fullName + " to appear in search results");
+        assertTrue(employeePage.recordsContainEmployee(employeeId),
+                "Expected employee with ID " + employeeId + " to be deleted");
     }
 
 }
