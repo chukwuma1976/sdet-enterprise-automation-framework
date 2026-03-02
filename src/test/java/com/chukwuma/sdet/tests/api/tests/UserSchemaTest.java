@@ -2,8 +2,6 @@ package com.chukwuma.sdet.tests.api.tests;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-
 import org.junit.jupiter.api.Test;
 
 class UserSchemaTest {

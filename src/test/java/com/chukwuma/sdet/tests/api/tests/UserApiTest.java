@@ -34,7 +34,6 @@ public class UserApiTest extends BaseApiTest {
     @Description("Get a single user by ID")
     void shouldGetUserSuccessfully() {
         Response response = userService.getUserById(2);
-        response.prettyPrint();
         response.then().spec(okResponse);
         assertEquals("Ervin Howell",
                 response.jsonPath().get("name"));
