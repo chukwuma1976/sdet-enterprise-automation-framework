@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.config.ConfigReader;
-import com.chukwuma.sdet.pages.DashboardPage;
 import com.chukwuma.sdet.pages.LoginPage;
+import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
 @Tag("ui")
-@Epic("Employee UI Tests")
+@Epic("Logout UI Tests")
 @Feature("Successful Logout")
 public class SuccessfulLogoutTest extends BaseTest {
 

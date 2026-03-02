@@ -16,7 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
 @Tag("ui")
-@Epic("Employee UI Tests")
+@Epic("Login UI Tests")
 @Feature("Successful Login")
 public class SuccessfulLoginTest extends BaseTest {
 
