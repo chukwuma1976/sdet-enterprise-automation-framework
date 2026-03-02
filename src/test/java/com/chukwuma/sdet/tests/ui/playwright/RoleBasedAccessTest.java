@@ -13,7 +13,6 @@ import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 import com.chukwuma.sdet.pages.user.UserManagementHelper;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 

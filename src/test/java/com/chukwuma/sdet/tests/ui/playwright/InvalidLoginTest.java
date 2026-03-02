@@ -21,7 +21,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @Tag("ui")
-@Epic("Login Tests")
+@Epic("Login UI Tests")
 @Feature("Invalid Login")
 public class InvalidLoginTest extends BaseTest {
 

@@ -3,7 +3,6 @@ package com.chukwuma.sdet.pages.user;
 import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
-import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 

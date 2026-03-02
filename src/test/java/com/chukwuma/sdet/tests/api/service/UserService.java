@@ -6,6 +6,13 @@ import com.chukwuma.sdet.tests.api.specs.RequestSpecFactory;
 
 public class UserService {
 
+    public Response getUsers() {
+        return given()
+                .spec(RequestSpecFactory.getRequestSpec())
+                .when()
+                .get("/users");
+    }
+
     public Response getUserById(int id) {
         return given()
                 .spec(RequestSpecFactory.getRequestSpec())

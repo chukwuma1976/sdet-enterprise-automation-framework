@@ -23,6 +23,14 @@ public class UserApiTest extends BaseApiTest {
     UserService userService = new UserService();
 
     @Test
+    @Description("Get a users list")
+    void shouldGetUsersListSuccessfully() {
+        Response response = userService.getUsers();
+        response.then().spec(okResponse);
+        assertTrue(response.jsonPath().getList("$").size() > 0, "Expected at least one user in the list");
+    }
+
+    @Test
     @Description("Get a single user by ID")
     void shouldGetUserSuccessfully() {
         Response response = userService.getUserById(2);
@@ -36,7 +44,6 @@ public class UserApiTest extends BaseApiTest {
     @Description("Create a new user")
     void shouldCreateUserSuccessfully() {
         Response response = userService.createUser("Chukwuma", "SDET");
-        response.prettyPrint();
         response.then().spec(createdResponse);
         assertEquals("Chukwuma",
                 response.jsonPath().get("name"));
@@ -46,7 +53,6 @@ public class UserApiTest extends BaseApiTest {
     @Description("Update an existing user")
     void shouldUpdateUserSuccessfully() {
         Response response = userService.updateUser(2, "UpdatedName", "QA");
-        response.prettyPrint();
         response.then().spec(okResponse);
     }
 
@@ -54,7 +60,6 @@ public class UserApiTest extends BaseApiTest {
     @Description("Delete a user")
     void shouldDeleteUserSuccessfully() {
         Response response = userService.deleteUser(2);
-        response.prettyPrint();
         response.then().spec(okResponse);
     }
 }
