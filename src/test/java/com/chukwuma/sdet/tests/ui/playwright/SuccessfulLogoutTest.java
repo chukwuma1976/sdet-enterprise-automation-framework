@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.base.BaseTest;
-import com.chukwuma.sdet.config.ConfigReader;
-import com.chukwuma.sdet.pages.LoginPage;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 
 import io.qameta.allure.Description;
@@ -24,16 +23,10 @@ public class SuccessfulLogoutTest extends BaseTest {
     @DisplayName("User can logout after successful login")
     @Description("Verify that users can logout after successful login and are redirected to the login page")
     void shouldLogoutSuccessfully() {
-        LoginPage loginPage = new LoginPage(page);
+
         DashboardPage dashboardPage = new DashboardPage(page);
 
-        String username = ConfigReader.get("APP_USERNAME");
-        String password = ConfigReader.get("APP_PASSWORD");
-        String baseUrl = ConfigReader.get("BASE_URL");
-
-        page.navigate(baseUrl);
-
-        loginPage.login(username, password);
+        new AuthHelper(page).loginAsDefaultUser();
 
         dashboardPage.logout();
         assertTrue(dashboardPage.isOnLoginPage());

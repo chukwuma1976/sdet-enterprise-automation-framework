@@ -1,14 +1,13 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
-import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
-import com.chukwuma.sdet.config.ConfigReader;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,16 +25,9 @@ public class DashboardTest extends BaseTest {
     @Description("Dashboard should be displayed after successful login")
     void shouldDisplayDashboardAfterSuccessfulLogin() {
 
-        LoginPage loginPage = new LoginPage(page);
         DashboardPage dashboardPage = new DashboardPage(page);
 
-        String username = ConfigReader.get("APP_USERNAME");
-        String password = ConfigReader.get("APP_PASSWORD");
-        String baseUrl = ConfigReader.get("BASE_URL");
-
-        page.navigate(baseUrl);
-
-        loginPage.login(username, password);
+        new AuthHelper(page).loginAsDefaultUser();
 
         assertTrue(
                 dashboardPage.isLoaded(),

@@ -1,9 +1,8 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
-import com.chukwuma.sdet.config.ConfigReader;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
-import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataFactory;
 
 import io.qameta.allure.Description;
@@ -25,10 +24,7 @@ class DeleteEmployeeTest extends BaseTest {
 
     @BeforeEach
     void login() {
-        page.navigate(ConfigReader.get("BASE_URL"));
-        new LoginPage(page).login(
-                ConfigReader.get("APP_USERNAME"),
-                ConfigReader.get("APP_PASSWORD"));
+        new AuthHelper(page).loginAsDefaultUser();
     }
 
     @Test

@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.base.BaseTest;
-import com.chukwuma.sdet.config.ConfigReader;
-import com.chukwuma.sdet.pages.LoginPage;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 import com.chukwuma.sdet.pages.dashboard.QuickLaunchOption;
 
@@ -26,11 +25,7 @@ public class QuickLaunchTest extends BaseTest {
 
     @BeforeEach
     void setup() {
-        page.navigate(ConfigReader.get("BASE_URL"));
-
-        new LoginPage(page).login(
-                ConfigReader.get("APP_USERNAME"),
-                ConfigReader.get("APP_PASSWORD"));
+        new AuthHelper(page).loginAsDefaultUser();
 
         dashboardPage = new DashboardPage(page);
     }
