@@ -1,0 +1,92 @@
+package com.chukwuma.sdet.pages.dashboard;
+
+import com.chukwuma.sdet.config.ConfigReader;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+
+public class DashboardPage {
+
+    private final Page page;
+
+    public DashboardPage(Page page) {
+        this.page = page;
+    }
+
+    public boolean isLoaded() {
+        page.waitForSelector("h6:has-text('Dashboard')");
+        String dashboardHeader = page.locator("header h6").textContent().trim();
+        return dashboardHeader.equals("Dashboard");
+    }
+
+    public void logout() {
+
+        // Click the user dropdown icon directly
+        page.locator(".oxd-userdropdown-icon").click();
+
+        // Target logout from global page context
+        Locator logoutOption = page.locator("text=Logout");
+
+        logoutOption.waitFor();
+
+        logoutOption.click();
+
+        page.waitForURL("**/auth/login");
+    }
+
+    public boolean isOnLoginPage() {
+        page.waitForURL("**/auth/login");
+        return page.url().contains("/auth/login");
+    }
+
+    public void selectQuickLaunchOption(QuickLaunchOption option) {
+        page.getByRole(
+                AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(option.getLabel())).click();
+
+        page.waitForURL("**" + option.getUrlFragment());
+    }
+
+    public void goBackToDashboard() {
+        page.getByRole(
+                AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Dashboard")).click();
+
+        page.waitForURL("**/dashboard/index");
+    }
+
+    public boolean isOnExpectedQuickLaunchPage(QuickLaunchOption option) {
+        return page.url().contains(option.getUrlFragment());
+    }
+
+    public void navigateToAdminPage() {
+        page.navigate(ConfigReader.get("ADMIN_URL"));
+        page.waitForURL("**/admin/viewSystemUsers");
+    }
+
+    public boolean isAdminAccessBlocked() {
+        Locator alertLocator = page.getByRole(AriaRole.ALERT);
+        alertLocator.waitFor();
+        /*
+         * Check if the alert contains "Credential Required" text or if we're still on
+         * the dashboard
+         */
+        return page.url().contains("/dashboard")
+                || alertLocator.filter(new Locator.FilterOptions()
+                        .setHasText("Credential Required"))
+                        .isVisible();
+    }
+
+    public void clickAdminModuleButton() {
+        page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Admin")).click();
+        page.waitForURL("**/admin/viewSystemUsers");
+    }
+
+    public boolean isAdminModuleAccessible() {
+        Locator heading = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("System Users"));
+        heading.waitFor();
+        return heading.isVisible();
+    }
+}

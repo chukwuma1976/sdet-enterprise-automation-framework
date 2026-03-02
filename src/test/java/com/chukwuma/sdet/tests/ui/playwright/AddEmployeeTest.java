@@ -1,15 +1,16 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.base.BaseCrudTest;
-import com.chukwuma.sdet.config.ConfigReader;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
-import com.chukwuma.sdet.pages.LoginPage;
 import com.chukwuma.sdet.utils.TestDataFactory;
 
 import io.qameta.allure.Description;
@@ -23,19 +24,16 @@ class AddEmployeeTest extends BaseCrudTest {
 
     @BeforeEach
     void login() {
-        page.navigate(ConfigReader.get("BASE_URL"));
-        new LoginPage(page).login(
-                ConfigReader.get("APP_USERNAME"),
-                ConfigReader.get("APP_PASSWORD"));
+        new AuthHelper(page).loginAsDefaultUser();
     }
 
     @Test
+    @DisplayName("User can add a new employee")
     @Description("Add a new employee")
     void shouldAddEmployeeSuccessfully() {
 
         String firstName = TestDataFactory.generateUniqueFirstName();
         String lastName = TestDataFactory.generateUniqueLastName();
-        String fullName = firstName + " " + lastName;
         employeeId = TestDataFactory.generateEmployeeId();
 
         EmployeePage employeePage = new EmployeePage(page);
@@ -45,11 +43,10 @@ class AddEmployeeTest extends BaseCrudTest {
         employeePage.addEmployee(firstName, lastName, employeeId);
 
         employeePage.goToEmployeeList();
-        employeePage.searchAndSelectEmployee(fullName);
+        employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        assertTrue(
-                employeePage.isEmployeePresent(fullName),
-                "Expected employee " + fullName + " to appear in search results");
+        assertTrue(employeePage.recordsContainEmployee(employeeId),
+                "Expected employee with ID " + employeeId + " to be deleted");
     }
 
 }
