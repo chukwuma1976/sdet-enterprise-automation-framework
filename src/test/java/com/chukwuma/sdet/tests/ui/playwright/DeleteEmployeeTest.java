@@ -4,8 +4,6 @@ import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
 import com.chukwuma.sdet.utils.TestDataFactory;
-import com.microsoft.playwright.options.LoadState;
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;

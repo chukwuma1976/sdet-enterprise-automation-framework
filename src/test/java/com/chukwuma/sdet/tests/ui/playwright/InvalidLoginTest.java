@@ -1,6 +1,7 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
 import com.chukwuma.sdet.base.BaseTest;
+import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.models.LoginData;
 import com.chukwuma.sdet.models.User;
 import com.chukwuma.sdet.pages.LoginPage;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,9 +23,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @Tag("ui")
-@Epic("Login Tests")
+@Epic("Login UI Tests")
 @Feature("Invalid Login")
 public class InvalidLoginTest extends BaseTest {
+
+    private AuthHelper authHelper;
+
+    @BeforeEach
+    void setup() {
+        authHelper = new AuthHelper(page);
+    }
 
     @ParameterizedTest
     @MethodSource("invalidUserProvider")
@@ -32,8 +41,7 @@ public class InvalidLoginTest extends BaseTest {
     void userCannotLoginWithInvalidCredentials(User user) {
 
         LoginPage loginPage = new LoginPage(page);
-        loginPage.navigateToLogin();
-        loginPage.login(user.username, user.password);
+        authHelper.login(user.getUsername(), user.getPassword());
 
         loginPage.verifyErrorMessageText("Invalid credentials");
     }
@@ -49,9 +57,7 @@ public class InvalidLoginTest extends BaseTest {
     void userCannotLoginWhenUsernameBlank() {
 
         LoginPage loginPage = new LoginPage(page);
-
-        loginPage.navigateToLogin();
-        loginPage.login("", "admin123");
+        authHelper.login("", "admin123");
 
         assertTrue(loginPage.isUsernameRequiredDisplayed());
     }
@@ -62,9 +68,7 @@ public class InvalidLoginTest extends BaseTest {
     void userCannotLoginWhenPasswordBlank() {
 
         LoginPage loginPage = new LoginPage(page);
-
-        loginPage.navigateToLogin();
-        loginPage.login("Admin", "");
+        authHelper.login("Admin", "");
 
         assertTrue(loginPage.isPasswordRequiredDisplayed());
     }
