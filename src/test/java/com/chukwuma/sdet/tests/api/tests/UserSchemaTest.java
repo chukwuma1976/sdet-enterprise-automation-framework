@@ -4,7 +4,9 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import static io.restassured.RestAssured.*;
 import org.junit.jupiter.api.Test;
 
-class UserSchemaTest {
+import com.chukwuma.sdet.tests.api.base.BaseApiTest;
+
+class UserSchemaTest extends BaseApiTest {
 
     @Test
     void validateUserSchema() {

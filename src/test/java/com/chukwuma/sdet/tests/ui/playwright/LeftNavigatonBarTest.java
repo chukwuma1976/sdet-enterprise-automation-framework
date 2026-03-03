@@ -4,6 +4,7 @@ import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.components.LeftNavigationBarComponent;
 import com.chukwuma.sdet.core.auth.AuthHelper;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
@@ -46,9 +47,10 @@ class LeftNavigationBarTest extends BaseTest {
                 new NavData("Buzz", "Buzz"));
     }
 
-    @DisplayName("Should navigate to correct header when clicking on left navigation tabs")
     @ParameterizedTest
     @MethodSource("navigationData")
+    @DisplayName("Should navigate to correct header when clicking on left navigation tabs")
+    @Description("Verify that clicking on each left navigation tab leads to the correct page header being displayed")
     void shouldNavigateToCorrectHeader(NavData data) {
 
         nav.clickTab(data.tabName());

@@ -3,7 +3,6 @@ package com.chukwuma.sdet.tests.ui.playwright;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +12,7 @@ import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.dashboard.DashboardPage;
 import com.chukwuma.sdet.pages.user.UserManagementHelper;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
@@ -29,7 +29,7 @@ public class RoleBasedAccessTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Admin user should access Admin module")
+    @Description("Admin user should access Admin module")
     void AdminUserShouldAccessAdminModule() {
 
         new AuthHelper(page).login(
@@ -41,7 +41,7 @@ public class RoleBasedAccessTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("ESS user should not access Admin module")
+    @Description("ESS user should not access Admin module")
     void essUserShouldNotAccessAdminModule() {
 
         UserManagementHelper helper = new UserManagementHelper(page);
