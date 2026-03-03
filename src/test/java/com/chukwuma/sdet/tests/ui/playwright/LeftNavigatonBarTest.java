@@ -3,8 +3,13 @@ package com.chukwuma.sdet.tests.ui.playwright;
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.components.LeftNavigationBarComponent;
 import com.chukwuma.sdet.core.auth.AuthHelper;
+
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -12,6 +17,9 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("ui")
+@Epic("Navigation UI Tests")
+@Feature("Left Navigation Bar")
 class LeftNavigationBarTest extends BaseTest {
 
     private LeftNavigationBarComponent nav;
