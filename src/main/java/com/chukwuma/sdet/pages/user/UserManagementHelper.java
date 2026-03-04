@@ -8,60 +8,60 @@ import com.microsoft.playwright.options.AriaRole;
 
 public class UserManagementHelper {
 
-    private final Page page;
-    private final EmployeePage employeePage;
+        private final Page page;
+        private final EmployeePage employeePage;
 
-    public UserManagementHelper(Page page) {
-        this.page = page;
-        this.employeePage = new EmployeePage(page);
-    }
-
-    public void ensureEssUserExists() {
-
-        new AuthHelper(page).login(
-                ConfigReader.get("ADMIN_USERNAME"),
-                ConfigReader.get("ADMIN_PASSWORD"));
-
-        employeePage.goToPim();
-        employeePage.goToEmployeeList();
-
-        String employeeId = ConfigReader.get("ESS_USER_ID");
-
-        employeePage.searchByEmployeeIdAndSelect(employeeId);
-
-        if (employeePage.isNoRecordsFoundVisible()) {
-            createEssUser();
+        public UserManagementHelper(Page page) {
+                this.page = page;
+                this.employeePage = new EmployeePage(page);
         }
-    }
 
-    private void createEssUser() {
+        public void ensureEssUserExists() {
 
-        employeePage.goToAddEmployee();
+                new AuthHelper(page).login(
+                                ConfigReader.get("ADMIN_USERNAME"),
+                                ConfigReader.get("ADMIN_PASSWORD"));
 
-        employeePage.addEmployeeWithOutSave(
-                ConfigReader.get("ESS_FIRST_NAME"),
-                ConfigReader.get("ESS_LAST_NAME"),
-                ConfigReader.get("ESS_USER_ID"));
+                employeePage.goToPim();
+                employeePage.goToEmployeeList();
 
-        // Enable login credentials
-        page.locator(".oxd-switch-input").click();
+                String employeeId = ConfigReader.get("ESS_USER_ID");
 
-        page.locator(".oxd-input-group:has(label:has-text('Username'))")
-                .locator("input")
-                .fill(ConfigReader.get("ESS_USERNAME"));
+                employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        page.locator("input[type='password']")
-                .first()
-                .fill(ConfigReader.get("ESS_PASSWORD"));
+                if (employeePage.isNoRecordsFoundVisible()) {
+                        createEssUser();
+                }
+        }
 
-        page.locator("input[type='password']")
-                .nth(1)
-                .fill(ConfigReader.get("ESS_PASSWORD"));
+        private void createEssUser() {
 
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"))
-                .click();
+                employeePage.goToAddEmployee();
 
-        page.waitForURL("**/viewPersonalDetails/**");
+                employeePage.addEmployeeWithOutSave(
+                                ConfigReader.get("ESS_FIRST_NAME"),
+                                ConfigReader.get("ESS_LAST_NAME"),
+                                ConfigReader.get("ESS_USER_ID"));
 
-    }
+                // Enable login credentials
+                page.locator(".oxd-switch-input").click();
+
+                page.locator(".oxd-input-group:has(label:has-text('Username'))")
+                                .locator("input")
+                                .fill(ConfigReader.get("ESS_USERNAME"));
+
+                page.locator("input[type='password']")
+                                .first()
+                                .fill(ConfigReader.get("ESS_PASSWORD"));
+
+                page.locator("input[type='password']")
+                                .nth(1)
+                                .fill(ConfigReader.get("ESS_PASSWORD"));
+
+                page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"))
+                                .click();
+
+                page.waitForURL(ConfigReader.get("view_personal_details.path"));
+
+        }
 }

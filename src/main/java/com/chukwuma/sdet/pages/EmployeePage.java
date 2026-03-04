@@ -1,5 +1,6 @@
 package com.chukwuma.sdet.pages;
 
+import com.chukwuma.sdet.config.ConfigReader;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -42,7 +43,7 @@ public class EmployeePage {
                                 new Page.GetByRoleOptions().setName("Save"))
                                 .click();
 
-                page.waitForURL("**/viewPersonalDetails/**");
+                page.waitForURL(ConfigReader.get("view_personal_details.path"));
         }
 
         public void addEmployeeWithOutSave(String firstName, String lastName, String employeeId) {
@@ -143,7 +144,7 @@ public class EmployeePage {
 
                 row.locator("button:has(.bi-pencil-fill)").click();
 
-                page.waitForURL("**/viewPersonalDetails/**");
+                page.waitForURL(ConfigReader.get("view_personal_details.path"));
         }
 
         public void deleteEmployee(String employeeId) {
