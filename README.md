@@ -30,6 +30,21 @@ This project demonstrates how enterprise SDET teams architect automation framewo
                       │ JSON Models | Data Factories  │
                       └───────────────────────────────┘
 ```
+
+# 📊 Execution Metrics
+
+Execution times measured locally (parallel enabled):
+
+```text
+| Suite Type | Command                        | Tests | Execution Time |
+| ---------- | ------------------------------ | ----- | -------------- |
+| Smoke      | `mvn test -Dgroups=smoke`      | 9     | ~40 seconds    |
+| Regression | `mvn test -Dgroups=regression` | 34    | ~2 minutes     |
+| API Only   | `mvn test -Dgroups=api`        | 12    | ~8 seconds     |
+| UI Only    | `mvn test -Dgroups=ui`         | 31    | ~2 minutes 42s |
+
+```
+
 ## Key Principles
 
 * Separation of concerns

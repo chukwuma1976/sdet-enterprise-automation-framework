@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 public class BaseApiTest {
 
     protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
+    private long startTime;
 
     @BeforeAll
     public static void setup() {
@@ -31,20 +32,16 @@ public class BaseApiTest {
     }
 
     @BeforeEach
-    void setUp(TestInfo testInfo) {
-        String testName = testInfo.getDisplayName();
-
-        MDC.put("testName", testName);
-
-        log.info("========== START TEST: {} ==========", testName);
+    void beforeEach(TestInfo testInfo) {
+        startTime = System.currentTimeMillis();
+        MDC.put("testName", testInfo.getDisplayName());
+        log.info("========== START TEST ==========");
     }
 
     @AfterEach
-    void tearDown(TestInfo testInfo) {
-
-        log.info("========== END TEST: {} ==========",
-                testInfo.getDisplayName());
-
+    void afterEach(TestInfo testInfo) {
+        long duration = System.currentTimeMillis() - startTime;
+        log.info("========== END TEST ({} ms) ==========", duration);
         MDC.clear();
     }
 }

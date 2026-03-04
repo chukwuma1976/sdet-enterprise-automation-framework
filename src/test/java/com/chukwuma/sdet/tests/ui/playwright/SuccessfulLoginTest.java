@@ -36,7 +36,7 @@ public class SuccessfulLoginTest extends BaseTest {
 
         loginPage.login(username, password);
 
-        page.waitForURL("**/dashboard/**");
+        page.waitForURL(ConfigReader.get("dashboard.path"));
 
         assertTrue(loginPage.isDashboardVisible(), "Dashboard should be visible after login");
     }

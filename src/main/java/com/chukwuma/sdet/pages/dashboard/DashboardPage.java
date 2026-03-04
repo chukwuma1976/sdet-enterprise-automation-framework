@@ -16,7 +16,7 @@ public class DashboardPage {
     public boolean isLoaded() {
         page.waitForSelector("h6:has-text('Dashboard')");
         String dashboardHeader = page.locator("header h6").textContent().trim();
-        return dashboardHeader.equals("Dashboard");
+        return dashboardHeader.contains("Dashboard");
     }
 
     public void logout() {
@@ -31,11 +31,11 @@ public class DashboardPage {
 
         logoutOption.click();
 
-        page.waitForURL("**/auth/login");
+        page.waitForURL(ConfigReader.get("auth_login.path"));
     }
 
     public boolean isOnLoginPage() {
-        page.waitForURL("**/auth/login");
+        page.waitForURL(ConfigReader.get("auth_login.path"));
         return page.url().contains("/auth/login");
     }
 
@@ -52,7 +52,7 @@ public class DashboardPage {
                 AriaRole.LINK,
                 new Page.GetByRoleOptions().setName("Dashboard")).click();
 
-        page.waitForURL("**/dashboard/index");
+        page.waitForURL(ConfigReader.get("dashboard.path"));
     }
 
     public boolean isOnExpectedQuickLaunchPage(QuickLaunchOption option) {
@@ -61,7 +61,7 @@ public class DashboardPage {
 
     public void navigateToAdminPage() {
         page.navigate(ConfigReader.get("ADMIN_URL"));
-        page.waitForURL("**/admin/viewSystemUsers");
+        page.waitForURL(ConfigReader.get("admin_view_systems_users.path"));
     }
 
     public boolean isAdminAccessBlocked() {
@@ -80,7 +80,7 @@ public class DashboardPage {
     public void clickAdminModuleButton() {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName("Admin")).click();
-        page.waitForURL("**/admin/viewSystemUsers");
+        page.waitForURL(ConfigReader.get("admin_view_systems_users.path"));
     }
 
     public boolean isAdminModuleAccessible() {

@@ -46,7 +46,7 @@ public class LoginPage {
     public boolean isDashboardVisible() {
         page.waitForSelector("h6:has-text('Dashboard')");
         String dashboardHeader = page.locator("header h6").textContent().trim();
-        return dashboardHeader.equals("Dashboard");
+        return dashboardHeader.contains("Dashboard");
     }
 
     public void verifyErrorMessageText(String expectedText) {

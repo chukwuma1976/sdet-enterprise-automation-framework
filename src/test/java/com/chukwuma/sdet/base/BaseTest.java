@@ -20,6 +20,8 @@ public abstract class BaseTest {
 
     protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
 
+    private long startTime;
+
     @BeforeAll
     void launchBrowser() {
 
@@ -33,13 +35,10 @@ public abstract class BaseTest {
     }
 
     @BeforeEach
-    void setUp(TestInfo testInfo) {
-
-        String testName = testInfo.getDisplayName();
-
-        MDC.put("testName", testName);
-
-        log.info("========== START TEST: {} ==========", testName);
+    void beforeEach(TestInfo testInfo) {
+        startTime = System.currentTimeMillis();
+        MDC.put("testName", testInfo.getDisplayName());
+        log.info("========== START TEST ==========");
     }
 
     @BeforeEach
@@ -52,11 +51,9 @@ public abstract class BaseTest {
     }
 
     @AfterEach
-    void tearDown(TestInfo testInfo) {
-
-        log.info("========== END TEST: {} ==========",
-                testInfo.getDisplayName());
-
+    void afterEach(TestInfo testInfo) {
+        long duration = System.currentTimeMillis() - startTime;
+        log.info("========== END TEST ({} ms) ==========", duration);
         MDC.clear();
     }
 
