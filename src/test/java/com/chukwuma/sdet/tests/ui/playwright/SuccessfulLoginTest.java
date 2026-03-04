@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
+@Tag("smoke")
 @Tag("ui")
 @Epic("Login UI Tests")
 @Feature("Successful Login")

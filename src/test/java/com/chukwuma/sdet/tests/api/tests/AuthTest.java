@@ -14,6 +14,7 @@ import com.chukwuma.sdet.tests.api.base.BaseApiTest;
 import com.chukwuma.sdet.tests.api.config.ApiConfig;
 import com.chukwuma.sdet.tests.api.models.ApiUser;
 
+@Tag("regression")
 @Tag("api")
 @Epic("Auth API Tests")
 @Feature("Authentication and Authorization, Role-Based Access Control")

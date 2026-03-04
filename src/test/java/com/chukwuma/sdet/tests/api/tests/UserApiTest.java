@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Tag;
 
 import static com.chukwuma.sdet.tests.api.specs.ResponseSpecs.*;
 
+@Tag("smoke")
 @Tag("api")
 @Epic("User API Tests")
 @Feature("CRUD operations on Users")
