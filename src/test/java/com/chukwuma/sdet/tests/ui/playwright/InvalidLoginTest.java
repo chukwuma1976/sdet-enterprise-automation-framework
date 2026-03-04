@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+@Tag("regression")
 @Tag("ui")
 @Epic("Login UI Tests")
 @Feature("Invalid Login")

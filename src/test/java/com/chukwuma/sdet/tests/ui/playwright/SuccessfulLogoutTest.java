@@ -14,6 +14,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
+@Tag("smoke")
 @Tag("ui")
 @Epic("Logout UI Tests")
 @Feature("Successful Logout")
