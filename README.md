@@ -3,9 +3,9 @@
 
 ## Playwright (Java) | JUnit 5 | CI/CD | Parallel-Ready
 
-A production-style UI test automation framework built with **Java + Playwright** that executes automatically inside a CI/CD pipeline.
+A production-style UI test automation framework built with **Java + Playwright** designed for **scalability, determinism, and CI reliability.**
 
-The project demonstrates how enterprise teams design **reliable, maintainable automated tests in a real enterprise environment** — not tutorial-style scripts.
+This project demonstrates how enterprise SDET teams architect automation frameworks — focusing on lifecycle control, isolation, parallel execution, and flakiness mitigation.
 
 # 🏗 Architecture Overview
 
@@ -33,10 +33,12 @@ The project demonstrates how enterprise teams design **reliable, maintainable au
 ## Key Principles
 
 * Separation of concerns
-* One BrowserContext per test
+* One `BrowserContext` per test
 * No shared mutable state
 * Deterministic test execution
 * CI-first architecture
+* Parallel-safe design
+* Failure diagnostics built-in
 
 # 🧰 Technology Stack
 
@@ -53,17 +55,36 @@ The project demonstrates how enterprise teams design **reliable, maintainable au
 | Config Management | Properties + Env Variables |
 
 ```
+# 🔄 Browser Lifecycle Management
+
+```text
+@BeforeAll   → Launch Playwright
+@BeforeEach  → Create BrowserContext
+@BeforeEach  → Create Page
+@Test        → Execute Test Logic
+@AfterEach   → Capture Screenshot on Failure
+@AfterEach   → Close Context
+@AfterAll    → Close Browser
+```
+
+Key design decisions:
+
+* Context-per-test isolation
+* Screenshot capture via TestExecutionExceptionHandler
+* Cleanup guaranteed even during failure
+* No cross-test contamination
+
 # ⚡ Parallel Execution Strategy
 
 The framework is designed for safe parallel execution.
 
 ## How it works:
 
-* New **BrowserContext per test**
+* New `BrowserContext per test`
 * No static Page objects
 * No shared test state
-* Unique deterministic test data
-* Isolated cleanup logic
+* Deterministic test data
+* Isolated teardown logic
 
 Parallel execution is configured via:
 
@@ -71,14 +92,14 @@ Parallel execution is configured via:
 junit.jupiter.execution.parallel.enabled=true
 ```
 Benefits:
-* Faster execution
-* Test isolation
+* Faster feedback cycles
+* Reliable CI execution
+* Order-independent tests
 * Enterprise scalability
-* CI-friendly performance
 
 # 🧪 Current Automated Coverage
 
-##Authentication Suite
+## 🔐Authentication Suite
 
 * ✅ Successful login
 * ✅ Invalid username
@@ -86,17 +107,35 @@ Benefits:
 * ✅ Required field validation
 * ✅ Negative authentication scenarios
 
+Designed to validate:
+
+* UI state transitions
+* Error messaging
+* Input validation
+* Access control behavior
+
+# 📸 Failure Observability Strategy
+
+To improve CI debuggability:
+
+* Screenshot captured at failure point
+* Uses TestExecutionExceptionHandler (not TestWatcher)
+* Avoids lifecycle timing issues
+* Failure artifacts available in CI logs
+
+Result: Deterministic, observable, and debuggable automation.
+
 # 🛠 Flakiness Mitigation Strategy
 
 UI automation fails when synchronization is weak. This framework prevents flakiness by:
 
-* Using Playwright’s built-in auto-waiting
+* Leveraging Playwright’s built-in auto-waiting
 * Avoiding `Thread.sleep()`
-* Using structural, label-based locators
-* Avoiding index-based (`nth()`) selectors
-* Isolating BrowserContext per test
-* Deterministic test data
-* Explicit assertions for UI state validation
+* Using semantic, label-based locators
+* Avoiding `nth()` selectors
+* Context isolation per test
+* Deterministic test data generation
+* Explicit state-based assertions
 
 Result: Stable, repeatable CI execution.
 
@@ -112,14 +151,14 @@ cd sdet-enterprise-automation-framework
 mvn clean test
 ```
 ## 3️⃣ Debug Mode (Headed Browser)
-Update configuration to disable headless mode:
+Set in `config.properties`:
 ```text
 headless=false
 ```
 
-# 🤖 Running in CI (GitHub Actions)
+# 🤖 CI Execution (GitHub Actions)
 
-Tests execute automatically on every push via:
+Pipeline file:
 ```text
 .github/workflows/ci-pipeline.yml
 ```
@@ -129,8 +168,10 @@ CI Pipeline Steps:
 2. Set up Java 17
 3. Install dependencies
 4. Run Maven test suite
-5. Execute in headless mode
-6. Fail pipeline if tests fail
+5. Run in headless mode
+6. Fail pipeline on test failure
+
+Designed for deterministic, headless execution.
 
 # 📁 Project Structure
 
@@ -156,6 +197,7 @@ Scalable for:
 * UI Automation
 * API Automation
 * Database Validation
+* Cross-layer verification
 
 # ⚙️ Configuration Management
 
@@ -163,6 +205,7 @@ Scalable for:
 * `config.properties`
 * Environment variable override support
 * Designed for multi-environment execution (dev / staging / prod)
+* CI-friendly configuration injection
 
 # 🛣 Roadmap
 
@@ -172,23 +215,29 @@ Scalable for:
 * 🔜 Integrated reporting
 * 🔜 Dockerized execution
 * 🔜 Cross-browser support
+* 🔜 Storage state optimization strategy
+
+## 📊 Test Report
+
+Live Allure Report:
+```text
+https://chukwuma1976.github.io/sdet-enterprise-automation-framework
+```
 
 # 🎯 Why This Project Stands Out
 
 This is not a tutorial project.
 
-* It demonstrates:
-* Real SDET architecture thinking
-* CI-integrated automation
-* Parallel-ready design
-* Enterprise-grade test isolation
-* Scalable project structure
+It demonstrates:
+
+* Enterprise automation architecture
+* Parallel-safe framework design
+* CI-integrated execution
+* Deterministic lifecycle management
+* Failure observability engineering
 * Clean separation of concerns
 
-## 📊 Test Report
-
-Live Allure Report:
-https://chukwuma1976.github.io/sdet-enterprise-automation-framework
+Designed and implemented with real-world SDET practices.
 
 # 👤 Author
 ## Chukwuma Anyadike

@@ -15,7 +15,7 @@ import io.qameta.allure.Feature;
 @Tag("regression")
 @Tag("api")
 @Epic("User API Tests")
-@Feature("CRUD operations on Users")
+@Feature("Schema validation on User API")
 class UserSchemaTest extends BaseApiTest {
 
     @Test
