@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.slf4j.MDC;
 
-import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.tests.api.config.ApiConfig;
 
 import org.slf4j.Logger;
@@ -18,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 public class BaseApiTest {
 
-    protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
+    protected static final Logger log = LoggerFactory.getLogger(BaseApiTest.class);
     private long startTime;
 
     @BeforeAll

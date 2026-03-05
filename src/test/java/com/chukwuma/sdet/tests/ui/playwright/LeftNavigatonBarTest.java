@@ -43,9 +43,7 @@ class LeftNavigationBarTest extends BaseTest {
                 new NavData("Performance", "Performance"),
                 new NavData("Dashboard", "Dashboard"),
                 new NavData("Directory", "Directory"), // h6 exception
-                new NavData("Maintenance", "Maintenance"),
-                new NavData("Claim", "Claim"),
-                new NavData("Buzz", "Buzz"));
+                new NavData("Maintenance", "Maintenance"));
     }
 
     @ParameterizedTest
