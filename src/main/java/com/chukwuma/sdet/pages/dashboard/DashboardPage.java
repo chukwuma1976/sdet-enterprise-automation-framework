@@ -37,11 +37,6 @@ public class DashboardPage {
         employeesOnLeaveWidget = page.getByText("Employees on Leave Today");
         employeeDistributionSubUnit = page.getByText("Employee Distribution by Sub");
         employeeDistributionLocation = page.getByText("Employee Distribution by Location");
-
-        dashboardHeader = page.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Dashboard"));
-
-        dashboardHeader.waitFor();
     }
 
     public boolean isLoaded() {

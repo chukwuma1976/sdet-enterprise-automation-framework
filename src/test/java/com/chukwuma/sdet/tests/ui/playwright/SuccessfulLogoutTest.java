@@ -26,9 +26,9 @@ public class SuccessfulLogoutTest extends BaseTest {
     @Description("Verify that users can logout after successful login and are redirected to the login page")
     void shouldLogoutSuccessfully() {
 
-        DashboardPage dashboardPage = new DashboardPage(page);
-
         new AuthHelper(page).loginAsDefaultUser();
+
+        DashboardPage dashboardPage = new DashboardPage(page);
 
         dashboardPage.logout();
         assertTrue(dashboardPage.isOnLoginPage());
