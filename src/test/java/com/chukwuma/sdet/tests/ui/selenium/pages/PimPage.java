@@ -34,6 +34,7 @@ public class PimPage {
     }
 
     public void clickAddEmployee() {
+        waitForPageReady();
         ElementActions.click(driver, addEmployeeBtn);
     }
 

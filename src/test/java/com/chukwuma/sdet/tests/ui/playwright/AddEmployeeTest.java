@@ -35,7 +35,7 @@ class AddEmployeeTest extends BaseCrudTest {
 
         String firstName = TestDataFactory.generateUniqueFirstName();
         String lastName = TestDataFactory.generateUniqueLastName();
-        employeeId = TestDataFactory.generateEmployeeId();
+        String employeeId = TestDataFactory.generateEmployeeId();
 
         EmployeePage employeePage = new EmployeePage(page);
 
