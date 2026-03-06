@@ -7,6 +7,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -142,7 +144,7 @@ class AuthTest extends BaseApiTest {
 
     private int getFirstUserIdByRole(String role) {
 
-        return given()
+        Integer id = given()
                 .when()
                 .get(usersUrl)
                 .then()
@@ -150,5 +152,8 @@ class AuthTest extends BaseApiTest {
                 .extract()
                 .jsonPath()
                 .getInt("users.find { it.role == '" + role + "' }.id");
+
+        assertNotNull(id, "No user found with role: " + role);
+        return id;
     }
 }

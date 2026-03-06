@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
+@Tag("playwright")
 @Tag("regression")
 @Tag("ui")
 @Epic("Employee UI Tests")

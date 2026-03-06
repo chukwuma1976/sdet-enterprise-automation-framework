@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("playwright")
 @Tag("regression")
 @Tag("ui")
 @Epic("Navigation UI Tests")

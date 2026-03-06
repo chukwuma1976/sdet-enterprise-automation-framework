@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.chukwuma.sdet.tests.api.base.BaseApiTest;
+import com.chukwuma.sdet.tests.api.config.ApiConfig;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -24,7 +25,7 @@ class UserSchemaTest extends BaseApiTest {
 
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/users/2")
+                .get(ApiConfig.BASE_URL + "/users/2")
                 .then()
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("user-schema.json"));
