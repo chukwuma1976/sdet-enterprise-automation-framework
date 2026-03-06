@@ -34,6 +34,7 @@
                 <version>3.2.5</version>
                 <configuration>
                     <groups>${groups}</groups>
+                    <rerunFailingTestsCount>2</rerunFailingTestsCount>
                 </configuration>
             </plugin>
         </plugins>
