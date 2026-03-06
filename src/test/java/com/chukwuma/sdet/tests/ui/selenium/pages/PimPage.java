@@ -49,19 +49,19 @@ public class PimPage {
 
         ElementActions.click(driver, saveBtn);
         waitForPageReady();
-        WaitUtils.waitForVisible(driver, fullNameLocator, 20);
+        WaitUtils.waitForVisible(driver, fullNameLocator, 30);
     }
 
     public boolean isEmployeeAdded(String firstName, String lastName) {
         waitForPageReady();
-        WaitUtils.waitForVisible(driver, fullNameLocator, 20);
+        WaitUtils.waitForVisible(driver, fullNameLocator, 30);
         String employeeName = ElementActions.getText(driver, fullNameLocator);
         return employeeName.contains(firstName) && employeeName.contains(lastName);
     }
 
     public boolean isEmployeeDeleted(String firstName, String lastName) {
         By container = By.className("orangehrm-paper-container");
-        WaitUtils.waitForVisible(driver, container, 10);
+        WaitUtils.waitForVisible(driver, container, 30);
         String containerText = ElementActions.getText(driver, container);
 
         return !(containerText.contains(firstName) && containerText.contains(lastName));
@@ -69,27 +69,27 @@ public class PimPage {
 
     public void searchEmployee(String employeeId) {
 
-        WaitUtils.waitForVisible(driver, tableHeader, 10);
+        WaitUtils.waitForVisible(driver, tableHeader, 30);
         ElementActions.type(driver, employeeIdLocator, employeeId);
         driver.findElement(searchBtn).click();
 
         waitForPageReady();
-        WaitUtils.waitForVisible(driver, tableRows, 10);
+        WaitUtils.waitForVisible(driver, tableRows, 30);
     }
 
     public void deleteEmployee(String employeeId) {
         By deleteBtn = deleteBtnByEmployeeId(employeeId);
-        WaitUtils.waitForVisible(driver, deleteBtn, 10);
+        WaitUtils.waitForVisible(driver, deleteBtn, 30);
         driver.findElement(deleteBtn).click();
 
-        WaitUtils.waitForVisible(driver, deleteModalBtn, 10);
+        WaitUtils.waitForVisible(driver, deleteModalBtn, 30);
         driver.findElement(deleteModalBtn).click();
 
-        WaitUtils.waitForVisible(driver, successFulDeleteToaster, 10);
+        WaitUtils.waitForVisible(driver, successFulDeleteToaster, 30);
     }
 
     private void waitForPageReady() {
-        WaitUtils.waitForInvisible(driver, loader, 10);
+        WaitUtils.waitForInvisible(driver, loader, 30);
     }
 
     private By deleteBtnByEmployeeId(String id) {

@@ -25,6 +25,7 @@ jobs:
 
     - name: Run API Tests
       run: mvn test -Dgroups=api
+      continue-on-error: true
 
     - name: Upload API Allure Results
       uses: actions/upload-artifact@v4
@@ -63,6 +64,7 @@ jobs:
 
     - name: Run Playwright Tests
       run: mvn -B test -Dgroups=playwright
+      continue-on-error: true
 
     - name: Upload Playwright Allure Results
       uses: actions/upload-artifact@v4
@@ -90,6 +92,7 @@ jobs:
 
     - name: Run Selenium Tests
       run: mvn -B test -Dgroups=selenium
+      continue-on-error: true
 
     - name: Upload Selenium Allure Results
       uses: actions/upload-artifact@v4

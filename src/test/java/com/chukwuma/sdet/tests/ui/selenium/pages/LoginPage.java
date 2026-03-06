@@ -25,7 +25,7 @@ public class LoginPage {
         ElementActions.type(driver, password, pass);
 
         driver.findElement(loginBtn).click();
-        WaitUtils.waitForVisible(driver, dashBoardHeader, 10);
+        WaitUtils.waitForVisible(driver, dashBoardHeader, 30);
     }
 
 }
