@@ -16,6 +16,7 @@ import com.chukwuma.sdet.tests.api.base.BaseApiTest;
 import com.chukwuma.sdet.tests.api.config.ApiConfig;
 import com.chukwuma.sdet.tests.api.models.ApiUser;
 
+@Tag("playwright")
 @Tag("regression")
 @Tag("api")
 @Epic("Auth API Tests")

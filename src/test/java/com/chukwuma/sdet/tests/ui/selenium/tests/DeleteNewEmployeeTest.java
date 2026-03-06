@@ -1,0 +1,57 @@
+package com.chukwuma.sdet.tests.ui.selenium.tests;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import com.chukwuma.sdet.config.ConfigReader;
+import com.chukwuma.sdet.tests.ui.selenium.base.BaseTest;
+import com.chukwuma.sdet.tests.ui.selenium.pages.DashboardPage;
+import com.chukwuma.sdet.tests.ui.selenium.pages.LoginPage;
+import com.chukwuma.sdet.tests.ui.selenium.pages.PimPage;
+import com.chukwuma.sdet.utils.TestDataFactory;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+
+@Tag("selenium")
+@Tag("smoke")
+@Tag("ui")
+@Epic("Selenium Employee CRUD Tests")
+@Feature("Delete Employee")
+public class DeleteNewEmployeeTest extends BaseTest {
+
+    @Test
+    @DisplayName("User can delete an employee")
+    @Description("Delete an employee")
+    void shouldDeleteAnEmployeeSuccessfully() {
+        String firstName = TestDataFactory.generateUniqueFirstName();
+        String lastName = TestDataFactory.generateUniqueLastName();
+        String employeeId = TestDataFactory.generateEmployeeId();
+
+        driver.get(ConfigReader.get("BASE_URL"));
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(ConfigReader.get("APP_USERNAME"), ConfigReader.get("APP_PASSWORD"));
+
+        DashboardPage dashboard = new DashboardPage(driver);
+        dashboard.selectPIM();
+
+        PimPage pimPage = new PimPage(driver);
+        pimPage.clickAddEmployee();
+        pimPage.addEmployee(firstName, lastName, employeeId);
+        pimPage.isEmployeeAdded(firstName, lastName);
+
+        pimPage.clickEmployeeList();
+        pimPage.searchEmployee(employeeId);
+        pimPage.deleteEmployee(employeeId);
+
+        pimPage.searchEmployeeAfterDelete(employeeId);
+        assertTrue(pimPage.isEmployeeDeleted(firstName, lastName));
+
+    }
+
+}
