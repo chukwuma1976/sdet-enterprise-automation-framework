@@ -1,11 +1,7 @@
 package com.chukwuma.sdet.tests.ui.selenium.pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.chukwuma.sdet.tests.ui.selenium.utils.ElementActions;
 import com.chukwuma.sdet.tests.ui.selenium.utils.WaitUtils;
 
@@ -34,16 +30,15 @@ public class PimPage {
 
     public PimPage(WebDriver driver) {
         this.driver = driver;
+        waitForPageReady();
     }
 
     public void clickAddEmployee() {
-        WaitUtils.waitForVisible(driver, addEmployeeBtn, 10);
-        driver.findElement(addEmployeeBtn).click();
+        ElementActions.click(driver, addEmployeeBtn);
     }
 
     public void clickEmployeeList() {
-        WaitUtils.waitForVisible(driver, employeeListBtn, 10);
-        driver.findElement(employeeListBtn).click();
+        ElementActions.click(driver, employeeListBtn);
     }
 
     public void addEmployee(String firstName, String lastName, String employeeId) {
@@ -52,8 +47,7 @@ public class PimPage {
         ElementActions.type(driver, lastNameLocator, lastName);
         ElementActions.type(driver, employeeIdLocator, employeeId);
 
-        WaitUtils.waitForClickable(driver, saveBtn, 10);
-        driver.findElement(saveBtn).click();
+        ElementActions.click(driver, saveBtn);
         waitForPageReady();
         WaitUtils.waitForVisible(driver, fullNameLocator, 20);
     }
@@ -83,14 +77,6 @@ public class PimPage {
         WaitUtils.waitForVisible(driver, tableRows, 10);
     }
 
-    public void searchEmployeeAfterDelete(String employeeId) {
-
-        WaitUtils.waitForVisible(driver, tableHeader, 10);
-        ElementActions.type(driver, employeeIdLocator, employeeId);
-        driver.findElement(searchBtn).click();
-        waitForPageReady();
-    }
-
     public void deleteEmployee(String employeeId) {
         By deleteBtn = deleteBtnByEmployeeId(employeeId);
         WaitUtils.waitForVisible(driver, deleteBtn, 10);
@@ -100,7 +86,6 @@ public class PimPage {
         driver.findElement(deleteModalBtn).click();
 
         WaitUtils.waitForVisible(driver, successFulDeleteToaster, 10);
-        System.out.println(driver.findElement(successFulDeleteToaster).toString());
     }
 
     private void waitForPageReady() {

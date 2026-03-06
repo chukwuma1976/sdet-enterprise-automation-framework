@@ -13,7 +13,7 @@ public class LoginPage {
     private By username = By.name("username");
     private By password = By.name("password");
     private By loginBtn = By.cssSelector("button[type='submit']");
-    private By dashBoardHeader = By.cssSelector("header");
+    private By dashBoardHeader = By.xpath("//h6[text()='Dashboard']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -27,4 +27,5 @@ public class LoginPage {
         driver.findElement(loginBtn).click();
         WaitUtils.waitForVisible(driver, dashBoardHeader, 10);
     }
+
 }

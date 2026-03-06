@@ -10,14 +10,25 @@ public class DashboardPage {
     private WebDriver driver;
 
     private By pimButton = By.cssSelector("a[href='/web/index.php/pim/viewPimModule']");
+    private By pimHeader = By.xpath("//h6[text()='PIM']");
 
     public DashboardPage(WebDriver driver) {
         this.driver = driver;
+        waitForPageReady();
     }
 
     public void selectPIM() {
-        WaitUtils.waitForVisible(driver, pimButton, 10);
+
+        WaitUtils.waitForClickable(driver, pimButton, 10);
         driver.findElement(pimButton).click();
+
+        // wait for PIM page to load
+        WaitUtils.waitForVisible(driver, pimHeader, 10);
+    }
+
+    private void waitForPageReady() {
+        By loader = By.cssSelector(".oxd-form-loader");
+        WaitUtils.waitForInvisible(driver, loader, 10);
     }
 
 }

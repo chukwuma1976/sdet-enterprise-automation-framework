@@ -13,7 +13,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
-@Tag("playwright")
 @Tag("regression")
 @Tag("api")
 @Epic("User API Tests")

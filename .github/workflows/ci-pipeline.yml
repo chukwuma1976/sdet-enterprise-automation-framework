@@ -26,9 +26,6 @@ jobs:
     - name: Run API Tests
       run: mvn test -Dgroups=api
 
-    - name: Generate API Allure Report
-      run: mvn allure:report
-
     - name: Upload API Allure Results
       uses: actions/upload-artifact@v4
       with:
@@ -36,7 +33,7 @@ jobs:
         path: target/allure-results
 
 
-  ui-tests:
+  playwright-tests:
     runs-on: ubuntu-latest
 
     env:
@@ -55,23 +52,53 @@ jobs:
       with:
         node-version: '20'
 
+    - name: Cache Playwright Browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright
+        
     - name: Install Playwright Browsers
       run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
-    - name: Run UI Tests
-      run: mvn test -Dgroups=ui
+    - name: Run Playwright Tests
+      run: mvn -B test -Dgroups=playwright
 
-    - name: Generate UI Allure Report
-      run: mvn allure:report
-
-    - name: Upload UI Allure Results
+    - name: Upload Playwright Allure Results
       uses: actions/upload-artifact@v4
       with:
-        name: ui-allure-results
+        name: playwright-allure-results
         path: target/allure-results
 
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: maven
+
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@v1
+
+    - name: Run Selenium Tests
+      run: mvn -B test -Dgroups=selenium
+
+    - name: Upload Selenium Allure Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ui-selenium-results
+        path: target/allure-results  
+
   publish-report:
-    needs: [api-tests, ui-tests]
+    needs: [api-tests, playwright-tests, selenium-tests]
     runs-on: ubuntu-latest
 
     permissions:
@@ -90,13 +117,26 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: api-allure-results
-        path: target/allure-results
+        path: api-results
 
-    - name: Download UI Results
+    - name: Download Playwright Results
       uses: actions/download-artifact@v4
       with:
-        name: ui-allure-results
-        path: target/allure-results
+        name: playwright-allure-results
+        path: playwright-results
+
+    - name: Download Selenium Results
+      uses: actions/download-artifact@v4
+      with:
+        name: ui-selenium-results
+        path: selenium-results
+
+    - name: Merge Allure Results
+      run: |
+        mkdir -p target/allure-results
+        cp -r api-results/* target/allure-results || true
+        cp -r playwright-results/* target/allure-results || true
+        cp -r selenium-results/* target/allure-results || true
 
     - name: Generate Unified Allure Report
       run: mvn allure:report

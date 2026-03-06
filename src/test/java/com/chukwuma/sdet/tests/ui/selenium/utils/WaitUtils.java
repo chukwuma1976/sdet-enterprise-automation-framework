@@ -19,7 +19,9 @@ public class WaitUtils {
     public static void waitForInvisible(WebDriver driver, By locator, int timeout) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.invisibilityOfElementLocated(locator),
+                ExpectedConditions.numberOfElementsToBe(locator, 0)));
     }
 
     public static WebElement waitForClickable(WebDriver driver, By locator, int timeout) {

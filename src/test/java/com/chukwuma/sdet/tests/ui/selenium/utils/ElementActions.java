@@ -70,4 +70,9 @@ public class ElementActions {
             return false;
         }
     }
+
+    public static WebElement waitFor(WebDriver driver, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 }

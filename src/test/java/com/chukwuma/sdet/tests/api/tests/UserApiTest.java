@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Tag;
 
 import static com.chukwuma.sdet.tests.api.specs.ResponseSpecs.*;
 
-@Tag("playwright")
 @Tag("smoke")
 @Tag("api")
 @Epic("User API Tests")
