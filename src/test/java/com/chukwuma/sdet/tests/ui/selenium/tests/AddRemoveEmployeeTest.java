@@ -22,11 +22,11 @@ import io.qameta.allure.Feature;
 @Tag("ui")
 @Epic("Selenium Employee CRUD Tests")
 @Feature("Add Employee")
-public class AddNewEmployeeTest extends BaseTest {
+public class AddRemoveEmployeeTest extends BaseTest {
 
     @Test
-    @DisplayName("User can add a new employee")
-    @Description("Add a new employee")
+    @DisplayName("User can add and then new employee")
+    @Description("Add and Delete a new employee")
     void shouldAddNewEmployeeSuccessfully() {
         String firstName = TestDataFactory.generateUniqueFirstName();
         String lastName = TestDataFactory.generateUniqueLastName();
@@ -48,6 +48,9 @@ public class AddNewEmployeeTest extends BaseTest {
         pimPage.clickEmployeeList();
         pimPage.searchEmployee(employeeId);
         pimPage.deleteEmployee(employeeId);
+
+        pimPage.searchEmployeeAfterDelete(employeeId);
+        assertTrue(pimPage.isEmployeeDeleted(firstName, lastName));
     }
 
 }
