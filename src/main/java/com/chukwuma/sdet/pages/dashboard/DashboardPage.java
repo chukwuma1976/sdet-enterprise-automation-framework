@@ -1,5 +1,7 @@
 package com.chukwuma.sdet.pages.dashboard;
 
+import java.util.List;
+
 import com.chukwuma.sdet.config.ConfigReader;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -7,10 +9,39 @@ import com.microsoft.playwright.options.AriaRole;
 
 public class DashboardPage {
 
-    private final Page page;
+    private Page page;
+
+    private Locator dashboardHeader;
+    private Locator profilePicture;
+    private Locator timeAtWorkWidget;
+    private Locator myActionsWidget;
+    private Locator quickLaunchWidget;
+    private Locator buzzWidget;
+    private Locator employeesOnLeaveWidget;
+    private Locator employeeDistributionSubUnit;
+    private Locator employeeDistributionLocation;
 
     public DashboardPage(Page page) {
         this.page = page;
+
+        dashboardHeader = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Dashboard"));
+
+        profilePicture = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.IMG,
+                new Locator.GetByRoleOptions().setName("profile picture"));
+
+        timeAtWorkWidget = page.getByText("Time at Work");
+        myActionsWidget = page.getByText("My Actions");
+        quickLaunchWidget = page.getByText("Quick Launch");
+        buzzWidget = page.getByText("Buzz Latest Posts");
+        employeesOnLeaveWidget = page.getByText("Employees on Leave Today");
+        employeeDistributionSubUnit = page.getByText("Employee Distribution by Sub");
+        employeeDistributionLocation = page.getByText("Employee Distribution by Location");
+
+        dashboardHeader = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Dashboard"));
+
+        dashboardHeader.waitFor();
     }
 
     public boolean isLoaded() {
@@ -89,4 +120,29 @@ public class DashboardPage {
         heading.waitFor();
         return heading.isVisible();
     }
+
+    // For Dashboard widgets
+    public boolean isDashboardVisible() {
+        return dashboardHeader.isVisible();
+    }
+
+    public boolean isProfilePictureVisible() {
+        return profilePicture.isVisible();
+    }
+
+    public boolean isWidgetVisible(Locator widget) {
+        return widget.isVisible();
+    }
+
+    public List<Locator> generateWidgetList() {
+        return List.of(
+                timeAtWorkWidget,
+                myActionsWidget,
+                quickLaunchWidget,
+                buzzWidget,
+                employeesOnLeaveWidget,
+                employeeDistributionSubUnit,
+                employeeDistributionLocation);
+    }
+
 }
