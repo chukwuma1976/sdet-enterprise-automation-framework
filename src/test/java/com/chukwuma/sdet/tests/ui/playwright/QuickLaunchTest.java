@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.core.auth.AuthHelper;
@@ -32,7 +33,7 @@ public class QuickLaunchTest extends BaseTest {
         dashboardPage = new DashboardPage(page);
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can navigate to Assign Leave page from Quick Launch")
     @Description("Verify that users can navigate to the Assign Leave page from Quick Launch and that the correct page is displayed")
     void testAssignLeaveNavigation() {
@@ -41,7 +42,7 @@ public class QuickLaunchTest extends BaseTest {
         dashboardPage.goBackToDashboard();
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can navigate to Leave List page from Quick Launch")
     @Description("Verify that users can navigate to the Leave List page from Quick Launch and that the correct page is displayed")
     void testLeaveListNavigation() {

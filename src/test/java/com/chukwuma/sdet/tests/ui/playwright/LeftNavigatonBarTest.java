@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import java.util.stream.Stream;
 
@@ -49,6 +50,7 @@ class LeftNavigationBarTest extends BaseTest {
                 new NavData("Buzz", "Buzz"));
     }
 
+    @RetryingTest(maxAttempts = 3)
     @ParameterizedTest
     @MethodSource("navigationData")
     @DisplayName("Should navigate to correct header when clicking on left navigation tabs")

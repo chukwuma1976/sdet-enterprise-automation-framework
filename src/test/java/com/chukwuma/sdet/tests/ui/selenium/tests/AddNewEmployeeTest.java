@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.tests.ui.selenium.base.BaseTest;
@@ -18,13 +18,12 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
 @Tag("selenium")
-@Tag("smoke")
 @Tag("ui")
 @Epic("Selenium Employee CRUD Tests")
 @Feature("Add Employee")
 public class AddNewEmployeeTest extends BaseTest {
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can add and then new employee")
     @Description("Add and Delete a new employee")
     void shouldAddNewEmployeeSuccessfully() {

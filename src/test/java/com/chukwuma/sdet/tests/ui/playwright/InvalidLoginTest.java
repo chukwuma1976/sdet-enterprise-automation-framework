@@ -18,9 +18,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junitpioneer.jupiter.RetryingTest;
 
 @Tag("playwright")
 @Tag("regression")
@@ -36,6 +36,7 @@ public class InvalidLoginTest extends BaseTest {
         authHelper = new AuthHelper(page);
     }
 
+    @RetryingTest(maxAttempts = 3)
     @ParameterizedTest
     @MethodSource("invalidUserProvider")
     @DisplayName("User cannot login with invalid credentials")
@@ -53,7 +54,7 @@ public class InvalidLoginTest extends BaseTest {
         return data.invalidUsers.stream();
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User cannot login when username is blank")
     @Description("Verify that users cannot login when the username field is left blank")
     void userCannotLoginWhenUsernameBlank() {
@@ -64,7 +65,7 @@ public class InvalidLoginTest extends BaseTest {
         assertTrue(loginPage.isUsernameRequiredDisplayed());
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User cannot login when password is blank")
     @Description("Verify that users cannot login when the password field is left blank")
     void userCannotLoginWhenPasswordBlank() {

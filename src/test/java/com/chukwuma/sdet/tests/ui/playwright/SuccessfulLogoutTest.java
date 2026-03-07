@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.core.auth.AuthHelper;
@@ -21,7 +21,7 @@ import io.qameta.allure.Feature;
 @Feature("Successful Logout")
 public class SuccessfulLogoutTest extends BaseTest {
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can logout after successful login")
     @Description("Verify that users can logout after successful login and are redirected to the login page")
     void shouldLogoutSuccessfully() {

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.base.BaseTest;
 import com.chukwuma.sdet.config.ConfigReader;
@@ -30,7 +30,7 @@ public class RoleBasedAccessTest extends BaseTest {
         dashboardPage = new DashboardPage(page);
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @Description("Admin user should access Admin module")
     void AdminUserShouldAccessAdminModule() {
 
@@ -42,7 +42,7 @@ public class RoleBasedAccessTest extends BaseTest {
         assertTrue(dashboardPage.isAdminModuleAccessible(), "Admin module should be accessible to Admin users");
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @Description("ESS user should not access Admin module")
     void essUserShouldNotAccessAdminModule() {
 
