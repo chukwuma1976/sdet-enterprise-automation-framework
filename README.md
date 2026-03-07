@@ -1,7 +1,7 @@
 # 🚀 Enterprise Test Automation Framework
 ![CI Pipeline](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
 
-## ## Playwright (Java) | Selenium | RestAssured | JUnit 5 | CI/CD | Parallel-Ready
+## Playwright (Java) | Selenium | RestAssured | JUnit 5 | CI/CD | Parallel-Ready
 
 A production-style UI test automation framework built with **Java + Playwright** designed for **scalability, determinism, and CI reliability.**
 
@@ -9,7 +9,7 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 
 # 🏗 Architecture Overview
 
-```text
+
                         ┌────────────────────────────┐
                         │        Test Classes        │
                         │  (Login, CRUD, etc.)       │
@@ -29,11 +29,11 @@ This project demonstrates how enterprise SDET teams architect automation framewo
                       │        Test Data Layer        │
                       │ JSON Models | Data Factories  │
                       └───────────────────────────────┘
-```
+
 
 ## 📁 Project Structure
 
-```text
+
 src
 ├── main/java/com/chukwuma/sdet
 │   ├── config
@@ -48,7 +48,7 @@ src
 │        ├── ui
 │        ├── api
 │        └── database
-```
+
 
 ## 🚀 CI/CD Pipeline
 
@@ -63,7 +63,7 @@ Pipeline file:
 
 ## 🔁 CI/CD Execution Flow
 
-```text
+
 Developer Push
       │
       ▼
@@ -83,7 +83,7 @@ Unified Allure Report Generated
       │
       ▼
 Report Published via GitHub Pages
-```
+
 
 # 🧭 Design Principles
 
@@ -91,19 +91,19 @@ The framework was designed with long-term maintainability and CI reliability in 
 
 Core principles include:
 
-• **Test Independence**  
+**Test Independence**  
 Tests run safely in any order, enabling deterministic parallel execution.
 
-• **Separation of Concerns**  
+**Separation of Concerns**  
 Test logic, page interactions, configuration, and utilities are clearly separated.
 
-• **Maintainable Locators**  
+**Maintainable Locators**  
 All UI locators live inside Page Objects to reduce duplication and simplify updates.
 
-• **Reusable Components**  
+**Reusable Components**  
 Shared behaviors such as authentication, configuration loading, and test data management are abstracted into reusable utilities.
 
-• **CI-First Execution**  
+**CI-First Execution**  
 Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
 
 # 📊 Test Strategy
@@ -130,11 +130,11 @@ Playwright provides fast modern browser automation while Selenium is retained fo
 
 ## Execution Strategy
 
-• **Smoke Tests**
+**Smoke Tests**
   - Run on every pull request
   - Validate critical user flows
 
-• **Regression Tests**
+**Regression Tests**
   - Run on scheduled builds or full CI runs
   - Provide broader coverage of functionality
 
@@ -334,7 +334,7 @@ Implementation approach:
 * Avoids lifecycle timing issues caused by TestWatcher
 
 Lifecycle flow:
-```text
+
 Test Failure
       ↓
 Exception Intercepted
@@ -343,7 +343,7 @@ Screenshot Captured
       ↓
 Failure Propagated
 
-```
+
 Benefits:
 
 * Faster debugging
