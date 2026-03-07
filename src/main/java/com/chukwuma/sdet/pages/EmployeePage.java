@@ -15,18 +15,24 @@ public class EmployeePage {
         }
 
         public void goToPim() {
-                page.getByRole(AriaRole.LINK,
-                                new Page.GetByRoleOptions().setName("PIM")).click();
+                Locator pim = page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("PIM"));
+                pim.waitFor();
+                pim.click();
         }
 
         public void goToAddEmployee() {
-                page.getByRole(AriaRole.LINK,
-                                new Page.GetByRoleOptions().setName("Add Employee")).click();
+                Locator addEmployeeTab = page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("Add Employee"));
+                addEmployeeTab.waitFor();
+                addEmployeeTab.click();
         }
 
         public void goToEmployeeList() {
-                page.getByRole(AriaRole.LINK,
-                                new Page.GetByRoleOptions().setName("Employee List")).click();
+                Locator employeeListTab = page.getByRole(AriaRole.LINK,
+                                new Page.GetByRoleOptions().setName("Employee List"));
+                employeeListTab.waitFor();
+                employeeListTab.click();
         }
 
         public void enterEmployeeId(String employeeId) {
@@ -108,9 +114,7 @@ public class EmployeePage {
 
                 option.click();
 
-                page.getByRole(AriaRole.BUTTON,
-                                new Page.GetByRoleOptions().setName("Search"))
-                                .click();
+                clickSearch();
 
                 page.waitForLoadState(LoadState.NETWORKIDLE);
         }
@@ -119,14 +123,17 @@ public class EmployeePage {
 
                 enterEmployeeId(employeeId);
 
-                page.getByRole(AriaRole.BUTTON,
-                                new Page.GetByRoleOptions().setName("Search"))
-                                .click();
-
-                page.waitForLoadState(LoadState.NETWORKIDLE);
+                clickSearch();
 
                 Locator recordsContainerLocator = page.locator(".orangehrm-paper-container");
                 recordsContainerLocator.waitFor();
+        }
+
+        private void clickSearch() {
+                Locator saveButton = page.getByRole(AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Search"));
+                saveButton.waitFor();
+                saveButton.click();
         }
 
         public boolean recordsContainEmployee(String employeeId) {

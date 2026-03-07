@@ -118,14 +118,17 @@ public class DashboardPage {
 
     // For Dashboard widgets
     public boolean isDashboardVisible() {
+        dashboardHeader.waitFor();
         return dashboardHeader.isVisible();
     }
 
     public boolean isProfilePictureVisible() {
+        profilePicture.waitFor();
         return profilePicture.isVisible();
     }
 
     public boolean isWidgetVisible(Locator widget) {
+        widget.waitFor();
         return widget.isVisible();
     }
 

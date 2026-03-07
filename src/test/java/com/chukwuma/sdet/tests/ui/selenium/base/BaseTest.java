@@ -7,10 +7,16 @@ import java.time.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import com.chukwuma.sdet.extensions.ScreenshotOnFailureExtension;
+
+@ExtendWith(ScreenshotOnFailureExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
 
     protected WebDriver driver;

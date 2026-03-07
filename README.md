@@ -92,19 +92,19 @@ The framework was designed with long-term maintainability and CI reliability in 
 Core principles include:
 
 **Test Independence**  
-Tests run safely in any order, enabling deterministic parallel execution.
+      Tests run safely in any order, enabling deterministic parallel execution.
 
 **Separation of Concerns**  
-Test logic, page interactions, configuration, and utilities are clearly separated.
+      Test logic, page interactions, configuration, and utilities are clearly separated.
 
 **Maintainable Locators**  
-All UI locators live inside Page Objects to reduce duplication and simplify updates.
+      All UI locators live inside Page Objects to reduce duplication and simplify updates.
 
 **Reusable Components**  
-Shared behaviors such as authentication, configuration loading, and test data management are abstracted into reusable utilities.
+      Shared behaviors such as authentication, configuration loading, and test data management are abstracted into reusable utilities.
 
 **CI-First Execution**  
-Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
+      Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
 
 # 📊 Test Strategy
 
@@ -147,10 +147,10 @@ Execution times measured locally (parallel enabled):
 
 | Suite Type | Command                        | Tests | Execution Time |
 | ---------- | ------------------------------ | ----- | -------------- |
-| Smoke      | `mvn test -Dgroups=smoke`      | 9     | ~40 seconds    |
-| Regression | `mvn test -Dgroups=regression` | 34    | ~2 minutes     |
-| API Only   | `mvn test -Dgroups=api`        | 12    | ~14 seconds    |
-| UI Only    | `mvn test -Dgroups=ui`         | 31    | ~2 minutes 42s |
+| Smoke      | `mvn test -Dgroups=smoke`      | 10    | ~66 seconds    |
+| Regression | `mvn test -Dgroups=regression` | 34    | ~2 minutes 22s |
+| API Only   | `mvn test -Dgroups=api`        | 12    | ~12 seconds    |
+| UI Only    | `mvn test -Dgroups=ui`         | 34    | ~4 minutes 6s  |
 
 # 🧰 Technology Stack
 
@@ -354,29 +354,46 @@ Benefits:
 
 Tests are organized using **JUnit 5 tags.**
 
-Available tags:
+## Test Suites
 
-```text
-smoke           @Tag("smoke")
-regression      @Tag("regression")
-ui              @Tag("ui")
-api             @Tag("api")
+The framework uses JUnit `@Tag` annotations to organize tests into logical suites.  
+These tags allow selective execution of tests for different purposes such as smoke testing, regression testing, UI testing, or API validation.
+
+| Suite Name      | Tag                   |
+|-----------------|-----------------------|
+| smoke           | `@Tag("smoke")`       |
+| regression      | `@Tag("regression")`  |
+| ui              | `@Tag("ui")`          |
+| api             | `@Tag("api")`         |
+| playwright      | `@Tag("playwright")`  |
+| selenium        | `@Tag("selenium")`    |
+
+### Example
+
+```java
+@Tag("smoke")
+@Tag("ui")
+@Test
+void userCanLogin() {
+    // test implementation
+}
 ```
+
 Run only smoke tests:
 ```text
-mvn test -DincludeTags=smoke
+mvn test -Dgroups=smoke
 ```
 Run regression suite:
 ```text
-mvn test -DincludeTags=regression
+mvn test -Dgroups=regression
 ```
 Run API tests only:
 ```text
-mvn test -DincludeTags=api
+mvn test -Dgroups=api
 ```
 Run UI tests only:
 ```text
-mvn test -DincludeTags=ui
+mvn test -Dgroups=ui
 ```
 Run a specific test class:
 ```text
