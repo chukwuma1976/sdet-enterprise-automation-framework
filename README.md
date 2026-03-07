@@ -9,7 +9,7 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 
 # 🏗 Architecture Overview
 
-
+```
                         ┌────────────────────────────┐
                         │        Test Classes        │
                         │  (Login, CRUD, etc.)       │
@@ -29,11 +29,11 @@ This project demonstrates how enterprise SDET teams architect automation framewo
                       │        Test Data Layer        │
                       │ JSON Models | Data Factories  │
                       └───────────────────────────────┘
-
+```
 
 ## 📁 Project Structure
 
-
+```
 src
 ├── main/java/com/chukwuma/sdet
 │   ├── config
@@ -48,7 +48,7 @@ src
 │        ├── ui
 │        ├── api
 │        └── database
-
+```
 
 ## 🚀 CI/CD Pipeline
 
@@ -63,7 +63,7 @@ Pipeline file:
 
 ## 🔁 CI/CD Execution Flow
 
-
+```
 Developer Push
       │
       ▼
@@ -83,7 +83,7 @@ Unified Allure Report Generated
       │
       ▼
 Report Published via GitHub Pages
-
+```
 
 # 🧭 Design Principles
 
@@ -334,7 +334,7 @@ Implementation approach:
 * Avoids lifecycle timing issues caused by TestWatcher
 
 Lifecycle flow:
-
+```
 Test Failure
       ↓
 Exception Intercepted
@@ -342,7 +342,7 @@ Exception Intercepted
 Screenshot Captured
       ↓
 Failure Propagated
-
+```
 
 Benefits:
 
