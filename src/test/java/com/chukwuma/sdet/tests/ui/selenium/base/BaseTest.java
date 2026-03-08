@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import com.chukwuma.sdet.extensions.ScreenshotOnFailureExtension;
+import com.chukwuma.sdet.tests.ui.selenium.extensions.ScreenshotOnFailureExtension;
 
 @ExtendWith(ScreenshotOnFailureExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -39,7 +39,9 @@ public class BaseTest {
         }
 
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+        if (!isCI) {
+            driver.manage().window().maximize();
+        }
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
     }
