@@ -103,6 +103,14 @@ public class DashboardPage {
                         .isVisible();
     }
 
+    public boolean isAdminMenuVisible() {
+
+        return page.getByRole(
+                AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Admin"))
+                .count() > 0;
+    }
+
     public void clickAdminModuleButton() {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName("Admin")).click();

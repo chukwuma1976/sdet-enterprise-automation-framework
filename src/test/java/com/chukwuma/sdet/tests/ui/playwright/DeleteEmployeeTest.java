@@ -50,7 +50,7 @@ class DeleteEmployeeTest extends BaseTest {
         employeePage.goToEmployeeList();
         employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        assertFalse(employeePage.recordsContainEmployee(employeeId),
+        assertFalse(employeePage.isNoRecordsFoundVisible(),
                 "Expected employee with ID " + employeeId + " to be deleted");
     }
 }

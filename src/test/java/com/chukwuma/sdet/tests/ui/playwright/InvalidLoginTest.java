@@ -36,7 +36,6 @@ public class InvalidLoginTest extends BaseTest {
         authHelper = new AuthHelper(page);
     }
 
-    @RetryingTest(maxAttempts = 3)
     @ParameterizedTest
     @MethodSource("invalidUserProvider")
     @DisplayName("User cannot login with invalid credentials")

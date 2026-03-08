@@ -130,17 +130,17 @@ public class EmployeePage {
         }
 
         private void clickSearch() {
-                Locator saveButton = page.getByRole(AriaRole.BUTTON,
+                Locator searchButton = page.getByRole(AriaRole.BUTTON,
                                 new Page.GetByRoleOptions().setName("Search"));
-                saveButton.waitFor();
-                saveButton.click();
+                searchButton.waitFor();
+                searchButton.click();
         }
 
         public boolean recordsContainEmployee(String employeeId) {
 
                 Locator rows = page.getByRole(AriaRole.ROW)
                                 .filter(new Locator.FilterOptions().setHasText(employeeId));
-
+                rows.waitFor();
                 return rows.count() > 0;
         }
 
@@ -148,6 +148,7 @@ public class EmployeePage {
 
                 Locator row = page.getByRole(AriaRole.ROW)
                                 .filter(new Locator.FilterOptions().setHasText(employeeId));
+                row.waitFor();
 
                 row.locator("button:has(.bi-pencil-fill)").click();
 
@@ -158,6 +159,7 @@ public class EmployeePage {
 
                 Locator row = page.getByRole(AriaRole.ROW)
                                 .filter(new Locator.FilterOptions().setHasText(employeeId));
+                row.waitFor();
 
                 row.locator("button:has(.bi-trash)").click();
 

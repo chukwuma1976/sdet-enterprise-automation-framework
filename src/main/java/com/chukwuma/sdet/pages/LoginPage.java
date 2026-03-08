@@ -51,6 +51,7 @@ public class LoginPage {
 
     public void verifyErrorMessageText(String expectedText) {
         errorMessage.waitFor();
+        page.waitForLoadState(LoadState.NETWORKIDLE);
         assertThat(errorMessage).hasText(expectedText);
     }
 

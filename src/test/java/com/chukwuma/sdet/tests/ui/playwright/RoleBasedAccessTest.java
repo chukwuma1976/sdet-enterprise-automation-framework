@@ -1,5 +1,6 @@
 package com.chukwuma.sdet.tests.ui.playwright;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -46,22 +47,22 @@ public class RoleBasedAccessTest extends BaseTest {
     @Description("ESS user should not access Admin module")
     void essUserShouldNotAccessAdminModule() {
 
-        UserManagementHelper helper = new UserManagementHelper(page);
-        helper.ensureEssUserExists();
+        UserManagementHelper userHelper = new UserManagementHelper(page);
 
-        new DashboardPage(page).logout();
+        // Ensure user exists (data setup)
+        userHelper.ensureEssUserExists();
 
+        // Login as ESS user
         new AuthHelper(page).login(
                 ConfigReader.get("ESS_USERNAME"),
                 ConfigReader.get("ESS_PASSWORD"));
 
-        DashboardPage dashboardPage = new DashboardPage(page);
+        DashboardPage dashboard = new DashboardPage(page);
 
-        dashboardPage.navigateToAdminPage();
-
-        assertTrue(
-                dashboardPage.isAdminAccessBlocked(),
-                "ESS user should not access Admin module");
+        // Validate access restriction
+        assertFalse(
+                dashboard.isAdminMenuVisible(),
+                "ESS user should not see Admin module");
     }
 
 }

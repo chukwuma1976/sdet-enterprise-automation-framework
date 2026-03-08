@@ -3,6 +3,8 @@ package com.chukwuma.sdet.pages.user;
 import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.core.auth.AuthHelper;
 import com.chukwuma.sdet.pages.EmployeePage;
+import com.chukwuma.sdet.pages.dashboard.DashboardPage;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
@@ -32,6 +34,8 @@ public class UserManagementHelper {
                 if (employeePage.isNoRecordsFoundVisible()) {
                         createEssUser();
                 }
+
+                new DashboardPage(page).logout();
         }
 
         private void createEssUser() {
@@ -43,12 +47,18 @@ public class UserManagementHelper {
                                 ConfigReader.get("ESS_LAST_NAME"),
                                 ConfigReader.get("ESS_USER_ID"));
 
-                // Enable login credentials
-                page.locator(".oxd-switch-input").click();
+                // Enable login details
+                Locator loginToggle = page.locator(".oxd-switch-input");
+                loginToggle.waitFor();
+                loginToggle.click();
 
-                page.locator(".oxd-input-group:has(label:has-text('Username'))")
-                                .locator("input")
-                                .fill(ConfigReader.get("ESS_USERNAME"));
+                // Wait until Username field appears
+                Locator usernameField = page.getByRole(
+                                AriaRole.TEXTBOX,
+                                new Page.GetByRoleOptions().setName("Username"));
+
+                usernameField.waitFor();
+                usernameField.fill(ConfigReader.get("ESS_USERNAME"));
 
                 page.locator("input[type='password']")
                                 .first()
@@ -58,10 +68,15 @@ public class UserManagementHelper {
                                 .nth(1)
                                 .fill(ConfigReader.get("ESS_PASSWORD"));
 
-                page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"))
+                page.getByRole(
+                                AriaRole.BUTTON,
+                                new Page.GetByRoleOptions().setName("Save"))
                                 .click();
 
-                page.waitForURL(ConfigReader.get("view_personal_details.path"));
+                // Confirm creation
+                page.getByText("Successfully Saved").waitFor();
 
+                // Wait for redirect
+                page.waitForURL(ConfigReader.get("view_personal_details.path"));
         }
 }
