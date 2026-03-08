@@ -29,19 +29,21 @@ public class BaseTest {
     @BeforeEach
     void setUp() {
         boolean isCI = System.getenv("CI") != null;
+
         ChromeOptions options = new ChromeOptions();
+
         if (isCI) {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
+        } else {
+            options.addArguments("--start-maximized");
         }
 
         driver = new ChromeDriver(options);
-        if (!isCI) {
-            driver.manage().window().maximize();
-        }
+
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
     }
