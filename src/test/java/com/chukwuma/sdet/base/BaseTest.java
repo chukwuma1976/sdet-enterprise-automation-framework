@@ -44,6 +44,7 @@ public abstract class BaseTest {
         context = browser.newContext();
         page = context.newPage();
         page.setDefaultTimeout(60000);
+        context.setDefaultTimeout(60000);
 
         // Start Tracing
         context.tracing().start(new Tracing.StartOptions()
@@ -75,6 +76,9 @@ public abstract class BaseTest {
                 try (InputStream is = Files.newInputStream(tracePath)) {
                     Allure.addAttachment("Playwright Trace", "application/zip", is, ".zip");
                 }
+
+                Allure.addAttachment("Page Source", page.content(), "text/html");
+                Allure.addAttachment("Current URL", page.url());
 
             } else {
                 log.info("✅ Test Passed: Discarding Trace.");

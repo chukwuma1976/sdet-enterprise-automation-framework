@@ -26,6 +26,7 @@
                 <version>2.12.0</version>
                 <configuration>
                     <allureVersion>2.24.0</allureVersion>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -38,6 +39,18 @@
                     <reportFormat>plain</reportFormat>
                     <printSummary>true</printSummary>
                     <useFile>false</useFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>target/screenshots</directory>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>

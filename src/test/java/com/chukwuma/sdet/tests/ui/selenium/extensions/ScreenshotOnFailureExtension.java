@@ -6,7 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -31,6 +31,12 @@ public class ScreenshotOnFailureExtension implements TestExecutionExceptionHandl
 
             if (driver != null) {
 
+                // Take screenshot for Allure
+                captureScreenshot(driver);
+                attachPageSource(driver);
+                captureUrl(driver);
+
+                // Optional: also save screenshot locally
                 File screenshot = ((TakesScreenshot) driver)
                         .getScreenshotAs(OutputType.FILE);
 
@@ -50,10 +56,6 @@ public class ScreenshotOnFailureExtension implements TestExecutionExceptionHandl
                         destination,
                         StandardCopyOption.REPLACE_EXISTING);
 
-                Allure.addAttachment(
-                        "Failure Screenshot",
-                        Files.newInputStream(destination));
-
                 System.out.println("Screenshot saved: " + destination);
             }
 
@@ -62,5 +64,20 @@ public class ScreenshotOnFailureExtension implements TestExecutionExceptionHandl
         }
 
         throw throwable;
+    }
+
+    @Attachment(value = "Failure Screenshot", type = "image/png")
+    public static byte[] captureScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(value = "Page Source", type = "text/html")
+    public static byte[] attachPageSource(WebDriver driver) {
+        return driver.getPageSource().getBytes();
+    }
+
+    @Attachment(value = "Current URL", type = "text/plain")
+    public static String captureUrl(WebDriver driver) {
+        return driver.getCurrentUrl();
     }
 }

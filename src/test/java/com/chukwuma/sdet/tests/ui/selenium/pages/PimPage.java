@@ -36,6 +36,7 @@ public class PimPage {
     public void clickAddEmployee() {
         waitForPageReady();
         ElementActions.click(driver, addEmployeeBtn);
+        waitForPageReady();
     }
 
     public void clickEmployeeList() {
@@ -44,11 +45,14 @@ public class PimPage {
 
     public void addEmployee(String firstName, String lastName, String employeeId) {
 
+        waitForPageReady();
+
         ElementActions.type(driver, firstNameLocator, firstName);
         ElementActions.type(driver, lastNameLocator, lastName);
         ElementActions.type(driver, employeeIdLocator, employeeId);
 
         ElementActions.click(driver, saveBtn);
+
         waitForPageReady();
         WaitUtils.waitForVisible(driver, fullNameLocator, 30);
     }
@@ -72,7 +76,7 @@ public class PimPage {
 
         WaitUtils.waitForVisible(driver, tableHeader, 30);
         ElementActions.type(driver, employeeIdLocator, employeeId);
-        driver.findElement(searchBtn).click();
+        ElementActions.click(driver, searchBtn);
 
         waitForPageReady();
         WaitUtils.waitForVisible(driver, tableRows, 30);
