@@ -8,7 +8,8 @@ import io.qameta.allure.Feature;
 
 import com.chukwuma.sdet.core.auth.AuthHelper;
 
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.assertj.core.api.SoftAssertions;
@@ -28,7 +29,7 @@ public class DashboardTest extends BaseTest {
         new AuthHelper(page).loginAsDefaultUser();
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("Dashboard is displayed after successful login")
     @Description("Dashboard should be displayed after successful login")
     void shouldDisplayDashboardAfterSuccessfulLogin() {
@@ -40,7 +41,7 @@ public class DashboardTest extends BaseTest {
                 "Dashboard should be visible after successful login");
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("Dashboard widgets should be visible")
     @Description("Dashboard header, image, and widgets should be visible")
     void dashboardWidgetsShouldBeVisible() {

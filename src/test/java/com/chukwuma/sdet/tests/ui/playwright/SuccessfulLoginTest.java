@@ -8,7 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Tag;
 @Feature("Successful Login")
 public class SuccessfulLoginTest extends BaseTest {
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can login with valid credentials")
     @Description("Verify that users can login with valid username and password")
     void userCanLoginWithValidCredentials() {

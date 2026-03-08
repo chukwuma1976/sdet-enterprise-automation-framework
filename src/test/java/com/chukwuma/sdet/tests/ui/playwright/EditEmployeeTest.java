@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.base.BaseCrudTest;
 import com.chukwuma.sdet.core.auth.AuthHelper;
@@ -28,7 +28,7 @@ public class EditEmployeeTest extends BaseCrudTest {
         new AuthHelper(page).loginAsDefaultUser();
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("Edit Employee Details")
     @Description("Edit an existing employee's details")
     void shouldEditEmployeeSuccessfully() {

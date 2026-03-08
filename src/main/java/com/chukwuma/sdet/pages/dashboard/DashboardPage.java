@@ -37,11 +37,6 @@ public class DashboardPage {
         employeesOnLeaveWidget = page.getByText("Employees on Leave Today");
         employeeDistributionSubUnit = page.getByText("Employee Distribution by Sub");
         employeeDistributionLocation = page.getByText("Employee Distribution by Location");
-
-        dashboardHeader = page.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Dashboard"));
-
-        dashboardHeader.waitFor();
     }
 
     public boolean isLoaded() {
@@ -108,6 +103,14 @@ public class DashboardPage {
                         .isVisible();
     }
 
+    public boolean isAdminMenuVisible() {
+
+        return page.getByRole(
+                AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Admin"))
+                .count() > 0;
+    }
+
     public void clickAdminModuleButton() {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName("Admin")).click();
@@ -123,14 +126,17 @@ public class DashboardPage {
 
     // For Dashboard widgets
     public boolean isDashboardVisible() {
+        dashboardHeader.waitFor();
         return dashboardHeader.isVisible();
     }
 
     public boolean isProfilePictureVisible() {
+        profilePicture.waitFor();
         return profilePicture.isVisible();
     }
 
     public boolean isWidgetVisible(Locator widget) {
+        widget.waitFor();
         return widget.isVisible();
     }
 

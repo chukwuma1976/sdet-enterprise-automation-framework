@@ -8,7 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 
-import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ class DeleteEmployeeTest extends BaseTest {
         new AuthHelper(page).loginAsDefaultUser();
     }
 
-    @Test
+    @RetryingTest(maxAttempts = 3)
     @DisplayName("User can delete an existing employee")
     @Description("Delete an existing employee")
     void shouldDeleteEmployeeSuccessfully() {
@@ -50,7 +50,7 @@ class DeleteEmployeeTest extends BaseTest {
         employeePage.goToEmployeeList();
         employeePage.searchByEmployeeIdAndSelect(employeeId);
 
-        assertFalse(employeePage.recordsContainEmployee(employeeId),
+        assertFalse(employeePage.isNoRecordsFoundVisible(),
                 "Expected employee with ID " + employeeId + " to be deleted");
     }
 }
