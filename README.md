@@ -1,4 +1,7 @@
 # 🚀 Enterprise Test Automation Framework
+
+![Version](https://img.shields.io/badge/version-v1.0.0-blue)
+
 ![CI Pipeline](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
 
 ## Playwright (Java) | Selenium | RestAssured | JUnit 5 | CI/CD | Parallel-Ready
@@ -36,18 +39,25 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 ```
 src
 ├── main/java/com/chukwuma/sdet
-│   ├── config
-│   ├── pages
-│   └── utilities
+│   ├── config                # environment configuration
+│   ├── pages                 # page objects for UI automation
+│   └── utilities             # shared utility classes
 │
-├── test/java/com/chukwuma/sdet
-│   ├── base
-│   ├── models
-│   ├── utils
-│   └── tests
-│        ├── ui
-│        ├── api
-│        └── database
+└── test/java/com/chukwuma/sdet
+    ├── base                  # base test setup and configuration
+    ├── models                # API data models / DTOs
+    ├── utils                 # test utilities
+    ├── extensions            # JUnit extensions (e.g., screenshots on failure)
+    │
+    ├── api
+    │   ├── tests             # API test cases
+    │   └── service           # API service layer
+    │
+    ├── ui
+    │   ├── selenium          # Selenium UI tests
+    │   └── playwright        # Playwright UI tests
+    │
+    └── database              # database-related tests
 ```
 
 ## 🚀 CI/CD Pipeline
@@ -144,13 +154,22 @@ This layered approach helps detect failures earlier in the testing pyramid while
 
 Execution times measured locally (parallel enabled):
 
-
 | Suite Type | Command                        | Tests | Execution Time |
 | ---------- | ------------------------------ | ----- | -------------- |
 | Smoke      | `mvn test -Dgroups=smoke`      | 10    | ~66 seconds    |
 | Regression | `mvn test -Dgroups=regression` | 34    | ~2 minutes 22s |
 | API Only   | `mvn test -Dgroups=api`        | 12    | ~12 seconds    |
-| UI Only    | `mvn test -Dgroups=ui`         | 34    | ~4 minutes 6s  |
+| UI Only    | `mvn test -Dgroups=ui`         | 34    | ~2 minutes 53s |
+
+## Allure Report
+
+![Allure Report](docs/images/allure-report.png)
+
+## 📊 Test Report
+
+![Live Allure Report](https://chukwuma1976.github.io/sdet-enterprise-automation-framework)
+
+
 
 # 🧰 Technology Stack
 
@@ -158,6 +177,7 @@ Execution times measured locally (parallel enabled):
 | ----------------- | -------------------------- |
 | Language          | Java 17                    |
 | UI Automation     | Playwright (Java)          |
+| API Automation    | RestAssured                |
 | Test Runner       | JUnit 5                    |
 | Build Tool        | Maven                      |
 | CI/CD             | GitHub Actions             |

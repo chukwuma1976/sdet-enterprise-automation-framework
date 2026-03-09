@@ -13,6 +13,7 @@ jobs:
 
     env:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      API_AUTH_BASE_URL: ${{ secrets.API_AUTH_BASE_URL }}
 
     steps:
     - uses: actions/checkout@v4
