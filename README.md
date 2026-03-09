@@ -167,8 +167,10 @@ Execution times measured locally (parallel enabled):
 
 ## 📊 Test Report
 
-![Live Allure Report](https://chukwuma1976.github.io/sdet-enterprise-automation-framework)
-
+## Live Allure Report
+```
+https://chukwuma1976.github.io/sdet-enterprise-automation-framework
+```
 
 
 # 🧰 Technology Stack
