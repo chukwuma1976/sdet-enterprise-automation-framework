@@ -1,4 +1,5 @@
 # 🚀 Enterprise Test Automation Framework
+![Version](https://img.shields.io/badge/version-v1.0.0-blue)
 ![CI Pipeline](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
 
 ## Playwright (Java) | Selenium | RestAssured | JUnit 5 | CI/CD | Parallel-Ready
