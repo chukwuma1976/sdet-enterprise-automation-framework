@@ -13,8 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.chukwuma.sdet.extensions.EnvironmentCondition;
 import com.chukwuma.sdet.extensions.ScreenshotOnFailureExtension;
 
+@ExtendWith(EnvironmentCondition.class)
 @ExtendWith(ScreenshotOnFailureExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseTest {
