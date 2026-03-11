@@ -1,5 +1,6 @@
 package com.chukwuma.sdet.extensions;
 
+import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.utilities.EnvironmentHealthCheck;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class EnvironmentCondition implements ExecutionCondition {
 
-    private static final String BASE_URL = "https://opensource-demo.orangehrmlive.com";
+    private static final String BASE_URL = ConfigReader.get("BASE_URL");
 
     @Override
     public ConditionEvaluationResult evaluateExecutionCondition(
