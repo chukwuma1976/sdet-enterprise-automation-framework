@@ -212,7 +212,7 @@ The framework is designed for safe parallel execution.
 
 ## How it works:
 
-* New `BrowserContext per test`
+* New `BrowserContext` per test
 * No static Page objects
 * No shared test state
 * Deterministic test data
