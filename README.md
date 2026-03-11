@@ -1,7 +1,6 @@
 # 🚀 Enterprise Test Automation Framework
 
 ![Version](https://img.shields.io/badge/version-v1.0.0-blue)
-
 ![CI Pipeline](https://github.com/chukwuma1976/sdet-enterprise-automation-framework/actions/workflows/ci-pipeline.yml/badge.svg)
 
 ## Playwright (Java) | Selenium | RestAssured | JUnit 5 | CI/CD | Parallel-Ready
@@ -156,7 +155,7 @@ Execution times measured locally (parallel enabled):
 
 | Suite Type | Command                        | Tests | Execution Time |
 | ---------- | ------------------------------ | ----- | -------------- |
-| Smoke      | `mvn test -Dgroups=smoke`      | 10    | ~66 seconds    |
+| Smoke      | `mvn test -Dgroups=smoke`      | 10    | ~42 seconds    |
 | Regression | `mvn test -Dgroups=regression` | 34    | ~2 minutes 22s |
 | API Only   | `mvn test -Dgroups=api`        | 12    | ~12 seconds    |
 | UI Only    | `mvn test -Dgroups=ui`         | 34    | ~2 minutes 53s |
@@ -167,8 +166,10 @@ Execution times measured locally (parallel enabled):
 
 ## 📊 Test Report
 
-![Live Allure Report](https://chukwuma1976.github.io/sdet-enterprise-automation-framework)
-
+### Live Allure Report
+```
+https://chukwuma1976.github.io/sdet-enterprise-automation-framework
+```
 
 
 # 🧰 Technology Stack
@@ -211,7 +212,7 @@ The framework is designed for safe parallel execution.
 
 ## How it works:
 
-* New `BrowserContext per test`
+* New `BrowserContext` per test
 * No static Page objects
 * No shared test state
 * Deterministic test data
