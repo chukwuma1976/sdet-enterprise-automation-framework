@@ -150,6 +150,13 @@ Playwright provides fast modern browser automation while Selenium is retained fo
 
 This layered approach helps detect failures earlier in the testing pyramid while still validating full user workflows.
 
+**Test Execution**
+
+The framework supports two execution environments:
+
+1. Public OrangeHRM demo site (default)
+2. Local Docker environment (optional)
+
 # 📊 Execution Metrics
 
 Execution times measured locally (parallel enabled):
@@ -161,6 +168,10 @@ Execution times measured locally (parallel enabled):
 | API Only   | `mvn test -Dgroups=api`        | 12    | ~12 seconds    |
 | UI Only    | `mvn test -Dgroups=ui`         | 34    | ~2 minutes 53s |
 
+A health check verifies that the target application is reachable before tests begin.
+
+If the service is unavailable, tests are skipped to prevent false failures.
+
 ## Allure Report
 
 ![Allure Report](docs/images/allure-report.png)
@@ -171,7 +182,6 @@ Execution times measured locally (parallel enabled):
 ```
 https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 ```
-
 
 # 🧰 Technology Stack
 
