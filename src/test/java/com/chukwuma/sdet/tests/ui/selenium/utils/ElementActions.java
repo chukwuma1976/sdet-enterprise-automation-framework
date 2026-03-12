@@ -17,6 +17,9 @@ public class ElementActions {
     }
 
     public static void type(WebDriver driver, By locator, String text) {
+
+        WaitUtils.waitForInvisible(driver, By.cssSelector(".oxd-form-loader"), 30);
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 

@@ -27,7 +27,7 @@ public class ScreenshotOnFailureExtension implements TestExecutionExceptionHandl
             var field = testInstance.getClass().getDeclaredField("driver");
             field.setAccessible(true);
 
-            WebDriver driver = (WebDriver) field.get(testInstance);
+            WebDriver driver = extractDriver(testInstance);
 
             if (driver != null) {
 
@@ -79,5 +79,22 @@ public class ScreenshotOnFailureExtension implements TestExecutionExceptionHandl
     @Attachment(value = "Current URL", type = "text/plain")
     public static String captureUrl(WebDriver driver) {
         return driver.getCurrentUrl();
+    }
+
+    private WebDriver extractDriver(Object testInstance) throws Exception {
+
+        Class<?> clazz = testInstance.getClass();
+
+        while (clazz != null) {
+            try {
+                var field = clazz.getDeclaredField("driver");
+                field.setAccessible(true);
+                return (WebDriver) field.get(testInstance);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            }
+        }
+
+        return null;
     }
 }
