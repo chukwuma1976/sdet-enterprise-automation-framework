@@ -137,12 +137,12 @@ jobs:
         chmod +x scripts/run-performance-tests.sh
         ./scripts/run-performance-tests.sh
 
-    - name: Upload Performance Results
+    - name: Upload Performance Reports
       uses: actions/upload-artifact@v4
       with:
-        name: performance-results
-        path: performance-tests
-
+        name: k6-performance-reports
+        path: performance-tests/results/*.html
+        
 
   publish-report:
     needs: [api-tests, playwright-tests, selenium-tests]
