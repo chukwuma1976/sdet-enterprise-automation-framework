@@ -1,19 +1,6 @@
-import http from 'k6/http';
-import { check } from 'k6';
+import { SMOKE_OPTIONS, TEST_URL } from '../config/performance-config.js';
+import { getUsers } from '../utils/api-helper.js';
 
-export const options = {
-    vus: 5,
-    duration: '10s'
-};
+export const options = SMOKE_OPTIONS;
 
-export default function () {
-
-    const res = http.get('https://jsonplaceholder.typicode.com/users');
-
-    check(res, {
-        'status is 200': (r) => r.status === 200,
-        'response time < 500ms': (r) => r.timings.duration < 500,
-        '10 users returned': (r) => JSON.parse(r.body).length === 10
-    });
-
-}
+export default () => getUsers(TEST_URL);

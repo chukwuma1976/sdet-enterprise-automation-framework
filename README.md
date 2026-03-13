@@ -12,25 +12,33 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 # 🏗 Architecture Overview
 
 ```
-                        ┌────────────────────────────┐
-                        │        Test Classes        │
-                        │  (Login, CRUD, etc.)       │
-                        └─────────────┬──────────────┘
-                                      │
-                        ┌─────────────▼──────────────┐
-                        │         BaseTest           │
-                        │  Browser Lifecycle Mgmt    │
-                        └─────────────┬──────────────┘
-                                      │
-              ┌───────────────────────▼───────────────────────┐
-              │              Page Objects (POM)               │
-              │ LoginPage | DashboardPage | EmployeePage etc. │
-              └───────────────────────┬───────────────────────┘
-                                      │
-                      ┌───────────────▼───────────────┐
-                      │        Test Data Layer        │
-                      │ JSON Models | Data Factories  │
-                      └───────────────────────────────┘
+                           ┌───────────────────────────────┐
+                           │        Test Classes           │
+                           │  UI | API | Performance Tests │
+                           └───────────────┬───────────────┘
+                                           │
+                           ┌───────────────▼───────────────┐
+                           │            BaseTest           │
+                           │  Lifecycle & Environment Mgmt │
+                           └───────────────┬───────────────┘
+                                           │
+          ┌────────────────────────────────▼────────────────────────────────┐
+          │                     Test Abstraction Layers                     │
+          │                                                                 │
+          │  UI Layer          API Layer           Performance Layer        │
+          │  Playwright        RestAssured         k6                       │
+          │  Selenium          Service Clients     Load Scripts             │
+          └────────────────────────────────┬────────────────────────────────┘
+                                           │
+                           ┌───────────────▼───────────────┐
+                           │         Test Data Layer       │
+                           │   Models | Factories | JSON   │
+                           └───────────────┬───────────────┘
+                                           │
+                           ┌───────────────▼───────────────┐
+                           │        CI/CD Pipeline         │
+                           │ GitHub Actions + Allure Report│
+                           └───────────────────────────────┘
 ```
 
 # 📁 Project Structure
@@ -84,7 +92,6 @@ sdet-enterprise-automation-framework
 # 🚀 CI/CD Pipeline
 
 The framework is designed for CI-first execution using GitHub Actions.
-
 Tests run in parallel across separate jobs to improve feedback speed.
 
 Pipeline file:
@@ -149,8 +156,6 @@ The framework follows a layered testing strategy to balance speed, reliability, 
 | UI Tests (Playwright) | Fast modern browser automation            | Playwright    |
 | UI Tests (Selenium)   | Cross-browser compatibility validation    | Selenium      |
 
-Playwright provides fast modern browser automation while Selenium is retained for cross-browser validation and legacy ecosystem compatibility.
-
 ```
            UI Tests
       (Playwright / Selenium)
@@ -167,6 +172,7 @@ Playwright provides fast modern browser automation while Selenium is retained fo
        Performance Testing
                (k6)
 ```
+Playwright provides fast modern browser automation while Selenium is retained for cross-browser validation and legacy ecosystem compatibility.
 
 ## Testing Pyramid
 ```
@@ -214,24 +220,9 @@ Set in `config.properties`:
 headless=false
 ```
 
-**Performance Tests**
-
-Run smoke test:
-```
-k6 run performance-tests/k6/smoke/users-smoke.js
-```
-Run load test:
-```
-k6 run performance-tests/k6/load/users-load.js
-```
-Run spike test:
-```
-k6 run performance-tests/k6/spike/users-spike.js
-```
-Run all performance tests
-```
-./scripts/run-performance-tests.sh
-```
+## How To Run Other Tests Locally
+- [Performance Testing](docs/performance-tests.md)
+- [Tagged Suites Testing](docs/tagged-suites-tests.md)
 
 # 📊 Execution Metrics
 

@@ -1,20 +1,6 @@
-import http from 'k6/http';
-import { check } from 'k6';
+import { SPIKE_OPTIONS, TEST_URL } from '../config/performance-config.js';
+import { getUsers } from '../utils/api-helper.js';
 
-export const options = {
-    stages: [
-        { duration: '10s', target: 10 },
-        { duration: '5s', target: 200 },
-        { duration: '10s', target: 10 }
-    ]
-};
+export const options = SPIKE_OPTIONS;
 
-export default function () {
-
-    const res = http.get('https://jsonplaceholder.typicode.com/users');
-
-    check(res, {
-        'status OK': (r) => r.status === 200
-    });
-
-}
+export default () => getUsers(TEST_URL);

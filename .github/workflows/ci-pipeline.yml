@@ -8,7 +8,20 @@ on:
 
 jobs:
 
+  api-health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run API Health Check
+      run: |
+        chmod +x scripts/health-check.sh
+        ./scripts/health-check.sh
+
+
   api-tests:
+    needs: api-health-check
     runs-on: ubuntu-latest
 
     env:
@@ -73,6 +86,7 @@ jobs:
         name: playwright-allure-results
         path: target/allure-results
 
+
   selenium-tests:
     runs-on: ubuntu-latest
 
@@ -100,6 +114,35 @@ jobs:
       with:
         name: ui-selenium-results
         path: target/allure-results  
+
+
+  performance-tests:
+    needs: api-tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install k6
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gnupg
+        curl https://dl.k6.io/key.gpg | sudo apt-key add -
+        echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+        sudo apt-get update
+        sudo apt-get install k6
+
+    - name: Run Performance Tests
+      run: |
+        chmod +x scripts/run-performance-tests.sh
+        ./scripts/run-performance-tests.sh
+
+    - name: Upload Performance Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-results
+        path: performance-tests
+
 
   publish-report:
     needs: [api-tests, playwright-tests, selenium-tests]
