@@ -9,7 +9,26 @@ A production-style UI test automation framework built with **Java + Playwright**
 
 This project demonstrates how enterprise SDET teams architect automation frameworks — focusing on lifecycle control, isolation, parallel execution, and flakiness mitigation.
 
-# 🏗 Architecture Overview
+## Table of Contents
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+- [CI/CD Pipeline](#ci/cd-pipeline)
+- [Design Principles](#design-principles)
+- [Test Strategy](#test-strategy)
+- [Running Tests Locally](#running-tests-locally)
+- [Execution Metrics](#execution-metrics)
+- [Execution Reports](#execution-reports)
+- [Technology Stack](#technology-stack)
+- [Current Automation Testing Coverage](#current-automation-testing-coverage)
+- [Failure Observability Strategy](#failure-observability-strategy)
+- [Smoke vs Regression Strategy](#smoke-vs-regression-strategy)
+- [Screenshot-on-Failure Strategy](#screenshot-on-failure-strategy)
+- [Running Tagged Suites](#running-tagged-suites)
+- [Headed vs Headless Execution](#headed-vs-headless-execution)
+- [Configuration Management](#configuration-management)
+- [Additional Documentation](#additional-documentation)
+
+## Architecture Overview
 
 ```
                            ┌───────────────────────────────┐
@@ -41,7 +60,7 @@ This project demonstrates how enterprise SDET teams architect automation framewo
                            └───────────────────────────────┘
 ```
 
-# 📁 Project Structure
+## Project Structure
 
 ```
 sdet-enterprise-automation-framework
@@ -89,7 +108,7 @@ sdet-enterprise-automation-framework
 └── README.md
 ```
 
-# 🚀 CI/CD Pipeline
+## CI/CD Pipeline
 
 The framework is designed for CI-first execution using GitHub Actions.
 Tests run in parallel across separate jobs to improve feedback speed.
@@ -99,7 +118,7 @@ Pipeline file:
 .github/workflows/ci-pipeline.yml
 ```
 
-## 🔁 CI/CD Execution Flow
+### 🔁 CI/CD Execution Flow
 
 ```
 Developer Push
@@ -123,7 +142,7 @@ Unified Allure Report Generated
 Report Published via GitHub Pages
 ```
 
-# 🧭 Design Principles
+## Design Principles
 
 The framework was designed with long-term maintainability and CI reliability in mind.
 Tests are designed to be deterministic, parallel-safe, and CI-first.
@@ -145,7 +164,7 @@ Core principles include:
 **CI-First Execution**  
       Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
 
-# 📊 Test Strategy
+## 📊 Test Strategy
 
 The framework follows a layered testing strategy to balance speed, reliability, and coverage.
 
@@ -174,7 +193,7 @@ The framework follows a layered testing strategy to balance speed, reliability, 
 ```
 Playwright provides fast modern browser automation while Selenium is retained for cross-browser validation and legacy ecosystem compatibility.
 
-## Testing Pyramid
+### Testing Pyramid
 ```
            E2E UI Tests
         -------------------
@@ -186,7 +205,7 @@ Playwright provides fast modern browser automation while Selenium is retained fo
 ```
 This layered approach helps detect failures earlier in the testing pyramid while still validating full user workflows.
 
-## Execution Strategy
+### Execution Strategy
 
 **Smoke Tests**
   - Run on every pull request
@@ -203,24 +222,24 @@ The framework supports two execution environments:
 1. Public OrangeHRM demo site (default)
 2. Local Docker environment (optional)
 
-# ▶️ Running Tests Locally
+## Running Tests Locally
 
-## 1️⃣ Clone the Repository
+### 1️⃣ Clone the Repository
 ```
 git clone https://github.com/chukwuma1976/sdet-enterprise-automation-framework.git
 cd sdet-enterprise-automation-framework
 ```
-## 2️⃣ Execute Tests
+### 2️⃣ Execute Tests
 ```
 mvn clean test
 ```
-## 3️⃣ Debug Mode (Headed Browser)
+### 3️⃣ Debug Mode (Headed Browser)
 Set in `config.properties`:
 ```
 headless=false
 ```
 
-## How To Run Other Tests Locally
+### How To Run Other Tests Locally
 - [Performance Testing](docs/performance-tests.md)
 - [Tagged Suites Testing](docs/tagged-suites-tests.md)
 
@@ -239,18 +258,21 @@ A health check verifies that the target application is reachable before tests be
 
 If the service is unavailable, tests are skipped to prevent false failures.
 
-# Allure Report
+## Execution Reports
 
-![Allure Report](docs/images/allure-report.png)
-
-## 📊 Test Report
-
-### For Live Allure Report
+### 📊 For Live Allure Report
 ```
 https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 ```
 
-# 🧰 Technology Stack
+#### Sample Allure Report
+
+![Allure Report](docs/images/allure-report.png)
+
+### Performance Testing Report
+- [Performance Test Reports](performance-tests.md#performance-test-reports)
+
+## Technology Stack
 
 | Layer             | Technology                 |
 | ----------------- | -------------------------- |
@@ -266,15 +288,15 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 | Test Data         | JSON + Model Mapping       |
 | Config Management | Properties + Env Variables |
 
-# 🧪 Current Automation Testing Coverage
+## Current Automation Testing Coverage
 
-## API Testing
+### API Testing
 
 * ✅ API CRUD testing: get all users, get users by id, add, edit, and delete User
 * ✅ Authentication and Role Based Access Control (RBAC) testing
 * ✅ Consumer contract validation using JSON Schema
 
-## UI Testing
+### UI Testing
 
 * ✅ Successful login
 * ✅ Invalid username
@@ -285,13 +307,13 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 * ✅ Employee CRUD testing scenarios: Add, Edit, Delete Employee
 * ✅ Dashboard Testing Scenarios
 
-## Performance Testing
+### Performance Testing
 
 * ✅ Smoke testing
 * ✅ Load testing
 * ✅ Spike testing
 
-# 📸 Failure Observability Strategy
+## Failure Observability Strategy
 
 To improve CI debuggability:
 
@@ -302,11 +324,11 @@ To improve CI debuggability:
 
 Result: Deterministic, observable, and debuggable automation.
 
-# 🚦 Smoke vs Regression Strategy
+## Smoke vs Regression Strategy
 
 The framework uses JUnit 5 tags to control test scope.
 
-## Smoke Tests
+### Smoke Tests
 Smoke tests validate critical user journeys and run on every CI pipeline execution.
 
 Typical coverage:
@@ -321,7 +343,7 @@ Execution time target:
 < 1 minute
 
 ```
-## Regression Tests
+### Regression Tests
 
 Regression tests validate **broader system functionality** including:
 
@@ -336,7 +358,7 @@ Regression suites are typically executed:
 * before release
 * during extended pipeline validation
 
-# 📸 Screenshot-on-Failure Strategy
+## Screenshot-on-Failure Strategy
 
 When UI tests fail in CI environments, diagnosing issues without visual artifacts becomes difficult.
 
@@ -365,11 +387,11 @@ Benefits:
 * Clear CI diagnostics
 * Reduced time investigating failures
 
-# 🏷 Running Tagged Suites
+## Running Tagged Suites
 
 Tests are organized using **JUnit 5 tags.**
 
-## Test Suites
+### Test Suites
 
 The framework uses JUnit `@Tag` annotations to organize tests into logical suites.  
 These tags allow selective execution of tests for different purposes such as smoke testing, regression testing, UI testing, or API validation.
@@ -383,7 +405,7 @@ These tags allow selective execution of tests for different purposes such as smo
 | playwright      | `@Tag("playwright")`  |
 | selenium        | `@Tag("selenium")`    |
 
-### Example
+#### Example
 
 ```java
 @Tag("smoke")
@@ -415,11 +437,11 @@ Run a specific test class:
 mvn -Dtest=ClassName test
 ```
 
-# 🖥 Headed vs Headless Execution
+## Headed vs Headless Execution
 
 The framework supports both **headed (local debugging)** and **headless (CI execution)** modes.
 
-## Headed Mode
+### Headed Mode
 Used during local debugging.
 ```
 headless=false
@@ -430,7 +452,7 @@ Benefits:
 * Step-by-step test observation
 * Development troubleshooting
 
-## Headless Mode
+### Headless Mode
 Used in CI environments.
 ```
 headless=true
@@ -443,7 +465,7 @@ Benefits:
 
 CI pipelines always execute in headless mode.
 
-# ⚙️ Configuration Management
+## Configuration Management
 
 * Centralized `ConfigReader`
 * `config.properties`
@@ -451,7 +473,7 @@ CI pipelines always execute in headless mode.
 * Designed for multi-environment execution (dev / staging / prod)
 * CI-friendly configuration injection
 
-# 📚 Additional Documentation
+## Additional Documentation
 
 For deeper architectural explanations see:
 
@@ -461,7 +483,7 @@ For deeper architectural explanations see:
 - [Retry Strategy](docs/retry-strategy.md)
 - [Database Validation Architecture](docs/database-validation.md)
 
-# 🎯 Why This Project Stands Out
+## Why This Project Stands Out
 
 This is not a tutorial project.
 
@@ -476,8 +498,8 @@ It demonstrates:
 
 Designed and implemented with real-world SDET practices.
 
-# 👤 Author
-## Chukwuma Anyadike
+## 👤 Author
+### Chukwuma Anyadike
 Software Development Engineer in Test (SDET)
 
 Automation Engineering | Playwright | Java | CI/CD | Parallel Architecture | API & UI Testing
