@@ -243,7 +243,7 @@ headless=false
 - [Performance Testing](docs/performance-tests.md)
 - [Tagged Suites Testing](docs/tagged-suites-tests.md)
 
-# Execution Metrics
+## Execution Metrics
 
 Execution times measured locally (parallel enabled):
 

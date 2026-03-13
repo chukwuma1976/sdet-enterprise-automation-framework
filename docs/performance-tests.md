@@ -32,6 +32,8 @@ These reports include:
 * Error rates
 * Percentile response times
 
+- [View Sample Performance Test Reports](#sample-performance-test-reports)
+
 ### Accessing Reports from the CI Pipeline
 
 After a workflow run completes:
@@ -73,6 +75,6 @@ Reports will be generated automatically in:
 performance-tests/results/
 ```
 ## Sample Performance Test Reports
-![Smoke Test Report](docs/images/performance-smoke-test.gif)
-![Smoke Load Report](docs/images/performance-load-test.gif)
-![Smoke Spike Report](docs/images/performance-spike-test.gif)
+![Smoke Test Report](images/performance-smoke-test.gif)
+![Smoke Load Report](images/performance-load-test.gif)
+![Smoke Spike Report](images/performance-spike-test.gif)
