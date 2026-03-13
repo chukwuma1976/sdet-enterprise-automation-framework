@@ -12,7 +12,7 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 ## Table of Contents
 - [Architecture Overview](#architecture-overview)
 - [Project Structure](#project-structure)
-- [CI/CD Pipeline](#ci/cd-pipeline)
+- [CI/CD Pipeline](#cicd-pipeline)
 - [Design Principles](#design-principles)
 - [Test Strategy](#test-strategy)
 - [Running Tests Locally](#running-tests-locally)
@@ -243,7 +243,7 @@ headless=false
 - [Performance Testing](docs/performance-tests.md)
 - [Tagged Suites Testing](docs/tagged-suites-tests.md)
 
-# 📊 Execution Metrics
+# Execution Metrics
 
 Execution times measured locally (parallel enabled):
 
@@ -270,7 +270,7 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 ![Allure Report](docs/images/allure-report.png)
 
 ### Performance Testing Report
-- [Performance Test Reports](performance-tests.md#performance-test-reports)
+- [Performance Test Reports](docs/performance-tests.md#performance-test-reports)
 
 ## Technology Stack
 

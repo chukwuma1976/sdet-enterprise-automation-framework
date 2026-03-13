@@ -72,5 +72,7 @@ Reports will be generated automatically in:
 ```
 performance-tests/results/
 ```
-## Sample Performance Test Report
-![Performance Test Report](docs/images/performance-smoke-test.mp4)
+## Sample Performance Test Reports
+![Smoke Test Report](docs/images/performance-smoke-test.gif)
+![Smoke Load Report](docs/images/performance-load-test.gif)
+![Smoke Spike Report](docs/images/performance-spike-test.gif)
