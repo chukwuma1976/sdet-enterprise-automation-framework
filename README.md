@@ -221,10 +221,10 @@ Playwright provides fast modern browser automation while Selenium is retained fo
 
 Test Distribution Strategy
 
-• Unit Tests → Fast, isolated, largest coverage
-• API / Service Tests → Validate business logic
-• Integration Tests → Verify component interaction
-• E2E UI Tests → Critical user workflows only
+- Unit Tests → Fast, isolated, largest coverage
+- API / Service Tests → Validate business logic
+- Integration Tests → Verify component interaction
+- E2E UI Tests → Critical user workflows only
 
 ### Execution Strategy
 
