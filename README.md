@@ -212,10 +212,10 @@ Playwright provides fast modern browser automation while Selenium is retained fo
          /    Tests     \
         /----------------\
        /  API / Service   \
-      /      Tests         \
-     /----------------------\
-    /       Unit Tests       \
-   /__________________________\
+      /      Tests        \
+     /--------------------\
+    /       Unit Tests     \
+   /________________________\
 
 Test Distribution Strategy
 
