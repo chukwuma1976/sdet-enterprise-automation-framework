@@ -16,6 +16,8 @@ Run all performance tests
 ```
 ./scripts/run-performance-tests.sh
 ```
+[⬅ Back to Main README](../README.md)
+
 ## Performance Test Reports
 
 Performance tests are executed using **k6** as part of the CI pipeline.
@@ -84,3 +86,5 @@ performance-tests/results/
 
 ## Spike Test Metrics
 ![Spike Test Report](images/performance-spike-test.gif)
+
+[⬅ Back to Main README](../README.md)

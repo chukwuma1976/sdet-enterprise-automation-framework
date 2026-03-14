@@ -107,3 +107,4 @@ In many cases, API validation or UI verification is sufficient. Overusing databa
 
 The framework therefore treats database validation as an **optional capability**, used only when system access and test requirements justify it.
 
+[⬅ Back to Main README](../README.md)

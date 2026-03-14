@@ -59,10 +59,8 @@ This project demonstrates how enterprise SDET teams architect automation framewo
                            │ GitHub Actions + Allure Report│
                            └───────────────────────────────┘
 ```
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Project Structure
 
@@ -111,10 +109,8 @@ sdet-enterprise-automation-framework
 ├── pom.xml
 └── README.md
 ```
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## CI/CD Pipeline
 
@@ -149,10 +145,8 @@ Unified Allure Report Generated
       ▼
 Report Published via GitHub Pages
 ```
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Design Principles
 
@@ -175,10 +169,8 @@ Core principles include:
 
 **CI-First Execution**  
       Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## 📊 Test Strategy
 
@@ -237,10 +229,8 @@ The framework supports two execution environments:
 
 1. Public OrangeHRM demo site (default)
 2. Local Docker environment (optional)
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Running Tests Locally
 
@@ -262,10 +252,8 @@ headless=false
 ### How To Run Other Tests Locally
 - [Performance Testing](docs/performance-tests.md)
 - [Tagged Suites Testing](docs/tagged-suites-tests.md)
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Execution Metrics
 
@@ -281,10 +269,8 @@ Execution times measured locally (parallel enabled):
 A health check verifies that the target application is reachable before tests begin.
 
 If the service is unavailable, tests are skipped to prevent false failures.
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Execution Reports
 
@@ -299,10 +285,8 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 
 ### Performance Testing Report
 - [Performance Test Reports](docs/performance-tests.md#performance-test-reports)
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Technology Stack
 
@@ -319,10 +303,8 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 | Design Pattern    | Page Object Model          |
 | Test Data         | JSON + Model Mapping       |
 | Config Management | Properties + Env Variables |
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Current Automation Testing Coverage
 
@@ -348,10 +330,8 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 * ✅ Smoke testing
 * ✅ Load testing
 * ✅ Spike testing
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Failure Observability Strategy
 
@@ -363,10 +343,8 @@ To improve CI debuggability:
 * Failure artifacts available in CI logs
 
 Result: Deterministic, observable, and debuggable automation.
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Smoke vs Regression Strategy
 
@@ -401,10 +379,8 @@ Regression suites are typically executed:
 * nightly
 * before release
 * during extended pipeline validation
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Screenshot-on-Failure Strategy
 
@@ -434,10 +410,8 @@ Benefits:
 * Faster debugging
 * Clear CI diagnostics
 * Reduced time investigating failures
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Running Tagged Suites
 
@@ -488,10 +462,8 @@ Run a specific test class:
 ```
 mvn -Dtest=ClassName test
 ```
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Headed vs Headless Execution
 
@@ -520,10 +492,8 @@ Benefits:
 * CI pipeline compatibility
 
 CI pipelines always execute in headless mode.
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Configuration Management
 
@@ -532,10 +502,8 @@ CI pipelines always execute in headless mode.
 * Environment variable override support
 * Designed for multi-environment execution (dev / staging / prod)
 * CI-friendly configuration injection
----
-
+...
 ⬆️ [Back to Table of Contents](#table-of-contents)
----
 
 ## Additional Documentation
 
@@ -546,10 +514,8 @@ For deeper architectural explanations see:
 - [Failure Observability & Flakiness Mitigation](docs/flakiness-mitigation.md)
 - [Retry Strategy](docs/retry-strategy.md)
 - [Database Validation Architecture](docs/database-validation.md)
----
-
-### ⬆️ [Back to Table of Contents](#table-of-contents)
----
+...
+⬆️ [Back to Table of Contents](#table-of-contents)
 
 ## Why This Project Stands Out
 

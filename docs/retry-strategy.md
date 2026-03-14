@@ -17,3 +17,5 @@ Instead it emphasizes:
 Retries may be introduced at the **CI pipeline** layer if needed.
 
 This ensures test failures remain **actionable signals rather than hidden noise.**
+
+[⬅ Back to Main README](../README.md)

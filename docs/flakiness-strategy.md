@@ -11,3 +11,5 @@ UI automation fails when synchronization is weak. This framework prevents flakin
 * Explicit state-based assertions
 
 Result: Stable, repeatable CI execution.
+
+[⬅ Back to Main README](../README.md)

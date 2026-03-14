@@ -16,3 +16,5 @@ Key design decisions:
 * Screenshot capture via TestExecutionExceptionHandler
 * Cleanup guaranteed even during failure
 * No cross-test contamination
+
+[⬅ Back to Main README](../README.md)
