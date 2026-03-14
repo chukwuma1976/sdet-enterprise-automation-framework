@@ -202,6 +202,7 @@ The framework follows a layered testing strategy to balance speed, reliability, 
 Playwright provides fast modern browser automation while Selenium is retained for cross-browser validation and legacy ecosystem compatibility.
 
 ### Testing Pyramid
+```
                 /\
                /  \
               /E2E \
@@ -212,10 +213,11 @@ Playwright provides fast modern browser automation while Selenium is retained fo
          /    Tests     \
         /----------------\
        /  API / Service   \
-      /      Tests        \
-     /--------------------\
-    /       Unit Tests     \
-   /________________________\
+      /      Tests         \
+     /----------------------\
+    /       Unit Tests       \
+   /__________________________\
+```   
 
 Test Distribution Strategy
 
