@@ -318,7 +318,7 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 To improve CI debuggability:
 
 * Screenshot captured at failure point
-* Uses TestExecutionExceptionHandler (not TestWatcher)
+* Uses TestExecutionExceptionHandler
 * Avoids lifecycle timing issues
 * Failure artifacts available in CI logs
 

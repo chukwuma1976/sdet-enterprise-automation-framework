@@ -75,6 +75,12 @@ Reports will be generated automatically in:
 performance-tests/results/
 ```
 ## Sample Performance Test Reports
+
+### Smoke Test Metrics
 ![Smoke Test Report](images/performance-smoke-test.gif)
-![Smoke Load Report](images/performance-load-test.gif)
-![Smoke Spike Report](images/performance-spike-test.gif)
+
+### Load Test Metrics
+![Load Test Report](images/performance-load-test.gif)
+
+## Spike Test Metrics
+![Spike Test Report](images/performance-spike-test.gif)
