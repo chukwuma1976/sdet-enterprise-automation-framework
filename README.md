@@ -548,7 +548,7 @@ For deeper architectural explanations see:
 - [Database Validation Architecture](docs/database-validation.md)
 ---
 
-⬆️ [Back to Table of Contents](#table-of-contents)
+### ⬆️ [Back to Table of Contents](#table-of-contents)
 ---
 
 ## Why This Project Stands Out
