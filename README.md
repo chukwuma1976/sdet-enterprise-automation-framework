@@ -156,23 +156,23 @@ Tests are designed to be deterministic, parallel-safe, and CI-first.
 Core principles include:
 
 **Test Independence**  
-      Tests run safely in any order, enabling deterministic parallel execution.
+- Tests run safely in any order, enabling deterministic parallel execution.
 
 **Separation of Concerns**  
-      Test logic, page interactions, configuration, and utilities are clearly separated.
+- Test logic, page interactions, configuration, and utilities are clearly separated.
 
 **Maintainable Locators**  
-      All UI locators live inside Page Objects to reduce duplication and simplify updates.
+- All UI locators live inside Page Objects to reduce duplication and simplify updates.
 
 **Reusable Components**  
-      Shared behaviors such as authentication, configuration loading, and test data management are abstracted into reusable utilities.
+- Shared behaviors such as authentication, configuration loading, and test data management are abstracted into reusable utilities.
 
 **CI-First Execution**  
-      Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
+- Tests are designed for reliable CI execution through headless mode, failure observability, and deterministic state management.
 
 ⬆️ [Back to Table of Contents](#table-of-contents)
 
-## 📊 Test Strategy
+## Test Strategy
 
 The framework follows a layered testing strategy to balance speed, reliability, and coverage.
 
@@ -202,16 +202,27 @@ The framework follows a layered testing strategy to balance speed, reliability, 
 Playwright provides fast modern browser automation while Selenium is retained for cross-browser validation and legacy ecosystem compatibility.
 
 ### Testing Pyramid
-```
-           E2E UI Tests
-        -------------------
-        Integration Tests
-     -------------------------
-        API / Service Tests
-   -----------------------------
-           Unit Tests
-```
-This layered approach helps detect failures earlier in the testing pyramid while still validating full user workflows.
+                /\
+               /  \
+              /E2E \
+             / UI   \
+            / Tests  \
+           /----------\
+          / Integration\
+         /    Tests     \
+        /----------------\
+       /  API / Service   \
+      /      Tests         \
+     /----------------------\
+    /       Unit Tests       \
+   /__________________________\
+
+Test Distribution Strategy
+
+• Unit Tests → Fast, isolated, largest coverage
+• API / Service Tests → Validate business logic
+• Integration Tests → Verify component interaction
+• E2E UI Tests → Critical user workflows only
 
 ### Execution Strategy
 
@@ -351,7 +362,7 @@ Result: Deterministic, observable, and debuggable automation.
 The framework uses JUnit 5 tags to control test scope.
 
 ### Smoke Tests
-Smoke tests validate critical user journeys and run on every CI pipeline execution.
+Smoke tests validate critical user work flows and run on every CI pipeline execution.
 
 Typical coverage:
 
