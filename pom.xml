@@ -122,5 +122,10 @@
             <version>3.25.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.romankh3</groupId>
+            <artifactId>image-comparison</artifactId>
+            <version>4.4.0</version>
+        </dependency>
 	</dependencies>
 </project>
