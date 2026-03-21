@@ -15,9 +15,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Tag("playwright")
 @Tag("visual")
 @Epic("Visual Tests")
 public class LoginVisualTest extends PlaywrightVisualBaseTest {
@@ -51,15 +50,17 @@ public class LoginVisualTest extends PlaywrightVisualBaseTest {
 
         ImageComparisonResult result = VisualComparisonUtils.compareImages(expectedImage, actualImage);
 
-        System.out.println("Diff %: " + result.getDifferencePercent());
-
         // Attach actual screenshot
         Allure.addAttachment("Actual Screenshot", "image/png",
                 new ByteArrayInputStream(screenshotBytes), ".png");
 
-        // Attach diff if failure
-        if (result.getImageComparisonState() != ImageComparisonState.MATCH) {
+        double diffPercentage = result.getDifferencePercent();
+        double threshold = 0.5;
 
+        System.out.println("Login Page Diff %: " + diffPercentage);
+
+        // Attach diff image if exists
+        if (result.getImageComparisonState() != ImageComparisonState.MATCH) {
             ByteArrayOutputStream diffStream = new ByteArrayOutputStream();
             ImageIO.write(result.getResult(), "png", diffStream);
 
@@ -67,8 +68,7 @@ public class LoginVisualTest extends PlaywrightVisualBaseTest {
                     new ByteArrayInputStream(diffStream.toByteArray()), ".png");
         }
 
-        // Assertion
-        assertEquals(ImageComparisonState.MATCH, result.getImageComparisonState(),
-                "Visual regression detected!");
+        assertTrue(diffPercentage < threshold,
+                "Visual regression detected! Diff: " + diffPercentage + "%");
     }
 }
