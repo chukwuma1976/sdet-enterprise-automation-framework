@@ -77,7 +77,7 @@ jobs:
       run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
     - name: Run Playwright Tests
-      run: mvn -B test -Dgroups="playwright & !visual"
+      run: mvn -B test -Dgroups=playwright
       continue-on-error: true
 
     - name: Upload Playwright Allure Results
@@ -170,7 +170,10 @@ jobs:
     - name: Install Playwright Browsers
       run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
-    - name: Run Playwright Tests
+    - name: Generate Auth State
+      run: mvn -B test -Dtest=AuthSetup
+
+    - name: Run Visual Tests
       run: mvn -B test -Dgroups=visual
       continue-on-error: true
             

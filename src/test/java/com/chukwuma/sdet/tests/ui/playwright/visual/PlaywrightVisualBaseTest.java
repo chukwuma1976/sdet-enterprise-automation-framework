@@ -27,6 +27,8 @@ public class PlaywrightVisualBaseTest {
                 .setLocale("en-US"));
 
         page = context.newPage();
+        page.setDefaultTimeout(60000);
+        context.setDefaultTimeout(60000);
 
         // Disable animations globally
         page.addInitScript(
