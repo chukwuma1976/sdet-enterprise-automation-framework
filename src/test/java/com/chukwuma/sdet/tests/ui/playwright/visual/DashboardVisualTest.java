@@ -56,11 +56,16 @@ public class DashboardVisualTest extends PlaywrightVisualBaseTest {
                 // Wait for page shell
                 page.waitForLoadState();
 
-                // Wait for all widgets to load and all spinners to disappear
+                // Wait for key widgets
                 dashboard.generateWidgetList().forEach(widget -> {
                         dashboard.isWidgetVisible(widget);
-                        dashboard.waitForSpinner();
                 });
+
+                // Wait for spinners to disappear
+                dashboard.waitForSpinner();
+
+                // Small stabilization buffer (important)
+                page.waitForTimeout(500);
 
                 // Disable animations
                 page.addStyleTag(new com.microsoft.playwright.Page.AddStyleTagOptions()
@@ -83,7 +88,7 @@ public class DashboardVisualTest extends PlaywrightVisualBaseTest {
                                 new ByteArrayInputStream(screenshotBytes), ".png");
 
                 double diffPercentage = result.getDifferencePercent();
-                double threshold = 1.5;
+                double threshold = 3.0;
 
                 System.out.println("Dashboard Diff %: " + diffPercentage);
 

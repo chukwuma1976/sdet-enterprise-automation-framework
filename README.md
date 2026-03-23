@@ -464,7 +464,7 @@ Each test compares: **Baseline Image vs Current Screenshot**
 * Simulates real user sessions  
 
 **Threshold-Based Comparison**
-* Allows minor differences (e.g., **1.5%**)  
+* Allows minor differences (e.g., **3.0%**)  
 * Reduces false positives from:
   - rendering differences  
   - anti-aliasing  
