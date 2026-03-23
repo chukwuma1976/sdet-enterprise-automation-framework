@@ -170,6 +170,9 @@ jobs:
     - name: Install Playwright Browsers
       run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
+    - name: Generate Auth State
+      run: mvn -B test -Dtest=AuthSetup
+
     - name: Run Visual Tests
       run: mvn -B test -Dgroups=visual
       continue-on-error: true

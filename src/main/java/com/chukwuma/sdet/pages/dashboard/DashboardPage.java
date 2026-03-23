@@ -6,6 +6,7 @@ import com.chukwuma.sdet.config.ConfigReader;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class DashboardPage {
 
@@ -149,6 +150,11 @@ public class DashboardPage {
                 employeesOnLeaveWidget,
                 employeeDistributionSubUnit,
                 employeeDistributionLocation);
+    }
+
+    public void waitForSpinner() {
+        page.waitForSelector(".oxd-loading-spinner",
+                new Page.WaitForSelectorOptions().setState(WaitForSelectorState.HIDDEN));
     }
 
 }
