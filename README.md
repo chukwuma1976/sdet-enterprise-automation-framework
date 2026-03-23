@@ -23,6 +23,7 @@ This project demonstrates how enterprise SDET teams architect automation framewo
 - [Failure Observability Strategy](#failure-observability-strategy)
 - [Smoke vs Regression Strategy](#smoke-vs-regression-strategy)
 - [Screenshot-on-Failure Strategy](#screenshot-on-failure-strategy)
+- [Visual Regression Testing](#visual-regression-testing)
 - [Running Tagged Suites](#running-tagged-suites)
 - [Headed vs Headless Execution](#headed-vs-headless-execution)
 - [Configuration Management](#configuration-management)
@@ -423,6 +424,105 @@ Benefits:
 * Faster debugging
 * Clear CI diagnostics
 * Reduced time investigating failures
+
+⬆️ [Back to Table of Contents](#table-of-contents)
+
+## Visual Regression Testing
+
+The framework includes **visual regression testing** to detect unintended UI changes using Playwright screenshots and image comparison.
+
+This validates **layout, styling, and rendering consistency** beyond DOM-based assertions.
+
+### Implementation Approach
+
+* Playwright screenshot capture  
+* Baseline image comparison  
+* Pixel-level diff detection  
+* Allure report attachments  
+
+Each test compares: **Baseline Image vs Current Screenshot**
+
+---
+
+### Covered Scenarios
+
+* ✅ Login Page  
+* ✅ Dashboard (with authenticated session reuse)
+
+---
+
+### Key Features
+
+**Deterministic Rendering**
+* Animations disabled  
+* Fixed viewport size  
+* Headless execution  
+
+**Session Reuse (Dashboard)**
+* Uses Playwright `storageState`  
+* Avoids repeated logins  
+* Simulates real user sessions  
+
+**Threshold-Based Comparison**
+* Allows minor differences (e.g., **1.5%**)  
+* Reduces false positives from:
+  - rendering differences  
+  - anti-aliasing  
+  - environment variance  
+
+---
+
+### Handling Dynamic Content
+
+* Waits for page load and spinners  
+* Disables animations  
+* Applies controlled timing before capture  
+
+---
+
+### Allure Report Integration
+
+* 📸 Actual screenshot attached  
+* 🔍 Diff image on failure  
+* 📊 Clear regression visibility  
+
+---
+
+### CI/CD Execution Strategy
+
+Visual tests run as a separate job: `mvn test -Dgroups=visual`
+
+* Isolated from functional UI tests  
+* Cleaner CI signal  
+* Faster debugging  
+
+---
+
+### Important Considerations
+
+Uses public demo environment:  https://opensource-demo.orangehrmlive.com
+
+Potential instability due to:
+
+* shared usage  
+* inconsistent data  
+* slower response times  
+
+Mitigation:
+
+* Threshold-based validation  
+* Context-aware failure analysis  
+* Designed for resilience, not pixel perfection  
+
+---
+
+### When Visual Tests Are Most Valuable
+
+* Detecting layout shifts  
+* Catching CSS regressions  
+* Validating UI consistency  
+
+Complements functional testing—not a replacement.
 
 ⬆️ [Back to Table of Contents](#table-of-contents)
 
