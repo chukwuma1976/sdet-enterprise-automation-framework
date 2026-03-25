@@ -29,3 +29,6 @@ target/
 
 # Performance test results
 performance-tests/results/
+
+# Storage state
+auth-state.json
