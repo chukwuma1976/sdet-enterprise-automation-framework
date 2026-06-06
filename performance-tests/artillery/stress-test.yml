@@ -1,0 +1,20 @@
+config: 
+  target: "https://jsonplaceholder.typicode.com"
+
+  phases: 
+    - duration: 60
+      arrivalRate: 50
+    
+    - duration: 60
+      arrivalRate: 100
+    
+    - duration: 60
+      arrivalRate: 150
+          
+    - duration: 60
+      arrivalRate: 200
+      
+scenarios:
+  - flow:
+    - get: 
+        url: "/users" 
