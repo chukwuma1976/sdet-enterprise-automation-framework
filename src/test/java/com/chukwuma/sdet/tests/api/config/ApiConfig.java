@@ -11,4 +11,9 @@ public class ApiConfig {
                         System.getenv().getOrDefault(
                                         "API_AUTH_BASE_URL",
                                         "https://dummyjson.com/"));
+
+        public static final String GRAPHQL_URL = System.getProperty("api.graphQL.url",
+                        System.getenv().getOrDefault(
+                                        "API_GRAPHQL_URL",
+                                        "https://countries.trevorblades.com/graphql"));
 }
