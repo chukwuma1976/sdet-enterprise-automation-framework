@@ -9,6 +9,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: orangehrm
+      MYSQL_USER: orangehrm
+      MYSQL_PASSWORD: orangehrm
     ports:
       - "3307:3306"
     volumes:
@@ -21,8 +23,12 @@ services:
       - "8080:80"
     depends_on:
       - mysql
-    links:
-      - mysql:mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: orangehrm
+      DB_USER: orangehrm
+      DB_PASSWORD: orangehrm
 
 volumes:
   mysql_data:
