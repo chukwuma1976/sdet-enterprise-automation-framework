@@ -6,6 +6,7 @@ import org.junitpioneer.jupiter.RetryingTest;
 
 import com.chukwuma.sdet.config.ConfigReader;
 import com.chukwuma.sdet.tests.ui.selenium.base.BaseTest;
+import com.chukwuma.sdet.tests.ui.selenium.pages.locators.AdvancedLocatorsPage;
 import com.chukwuma.sdet.tests.ui.selenium.pages.locators.IdLocatorsPage;
 import com.chukwuma.sdet.tests.ui.selenium.pages.locators.LocatorsPage;
 import com.chukwuma.sdet.tests.ui.selenium.pages.locators.NameLocatorsPage;
@@ -85,5 +86,23 @@ public class LocatorStrategiesTest extends BaseTest {
         locatorsPage.clickLinkByPartialLinkText("Academics");
         assert (driver.getCurrentUrl()).contains("academic");
 
+    }
+
+    @RetryingTest(maxAttempts = 3)
+    @DisplayName("CSS locator strategies")
+    @Description("Test a variety of CSS locator strategies")
+    void testCSSLocators() {
+        driver.get(ConfigReader.get("ADVANCED_LOCATORS_URL"));
+        AdvancedLocatorsPage locatorsPage = new AdvancedLocatorsPage(driver);
+        locatorsPage.confirmCssSelectors();
+    }
+
+    @RetryingTest(maxAttempts = 3)
+    @DisplayName("Xpath locator strategies")
+    @Description("Test a variety of Xpath locator strategies")
+    void testXpathLocators() {
+        driver.get(ConfigReader.get("ADVANCED_LOCATORS_URL"));
+        AdvancedLocatorsPage locatorsPage = new AdvancedLocatorsPage(driver);
+        locatorsPage.confirmXpathSelectors();
     }
 }
