@@ -105,4 +105,13 @@ public class LocatorStrategiesTest extends BaseTest {
         AdvancedLocatorsPage locatorsPage = new AdvancedLocatorsPage(driver);
         locatorsPage.confirmXpathSelectors();
     }
+
+    @RetryingTest(maxAttempts = 3)
+    @DisplayName("Relative locator strategies")
+    @Description("Test a variety of relative locator strategies")
+    void testRelativeLocators() {
+        driver.get(ConfigReader.get("ADVANCED_LOCATORS_URL"));
+        AdvancedLocatorsPage locatorsPage = new AdvancedLocatorsPage(driver);
+        locatorsPage.testRelativeLocators();
+    }
 }

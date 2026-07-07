@@ -3,6 +3,7 @@ package com.chukwuma.sdet.tests.ui.selenium.pages.locators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 public class AdvancedLocatorsPage {
 
@@ -36,11 +37,6 @@ public class AdvancedLocatorsPage {
     private final By siblingOfSearchInput = By
             .xpath("//input[@placeholder='Search the site']/following-sibling::input"); // Following sibling
     private final By tableRow = By.xpath("(//table//tr)[2]"); // Index
-    /*
-     * 7.3 XPath — when you need power
-     * Index:
-     * (//table//tr)[3]
-     */
 
     public AdvancedLocatorsPage(WebDriver driver) {
         this.driver = driver;
@@ -82,6 +78,26 @@ public class AdvancedLocatorsPage {
         assert (!driver.findElements(formControlInput).isEmpty());
         assert (driver.findElement(siblingOfSearchInput).getAttribute("value")).equals("multiple attributes");
         assert (driver.findElement(tableRow).getText()).contains("Headphones");
+    }
+
+    public void testRelativeLocators() {
+        By centerCell = By.xpath("(//table//td)[5]");
+
+        WebElement above = driver.findElement(with(By.tagName("td")).above(centerCell));
+        assert (above.getText()).equals("Available");
+
+        WebElement below = driver.findElement(with(By.tagName("td")).below(centerCell));
+        assert (below.getText()).equals("Available");
+
+        // WebElement left =
+        // driver.findElement(with(By.tagName("td")).toLeftOf(centerCell));
+        // assert (left.getText()).equals("Monitor");
+
+        // WebElement right =
+        // driver.findElement(with(By.tagName("td")).toRightOf(centerCell));
+        // assert (right.getText()).equals("0");
+
+        assert (driver.findElement(centerCell).getText()).equals("Out of stock");
     }
 
 }
