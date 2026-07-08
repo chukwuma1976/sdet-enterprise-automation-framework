@@ -1,11 +1,8 @@
 package com.chukwuma.sdet.tests.ui.selenium.base;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,11 +19,6 @@ import com.chukwuma.sdet.tests.ui.selenium.extensions.ScreenshotOnFailureExtensi
 public class BaseTest {
 
     protected WebDriver driver;
-
-    @BeforeAll
-    static void setupDriver() {
-        WebDriverManager.chromedriver().setup();
-    }
 
     @BeforeEach
     void setUp() {
@@ -55,7 +47,6 @@ public class BaseTest {
 
         if (driver != null) {
             driver.quit();
-            driver = null;
         }
     }
 }
