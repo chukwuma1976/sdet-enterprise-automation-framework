@@ -306,7 +306,7 @@ https://chukwuma1976.github.io/sdet-enterprise-automation-framework
 
 | Layer             | Technology                 |
 | ----------------- | -------------------------- |
-| Language          | Java 17                    |
+| Language          | Java 25                    |
 | UI Automation     | Playwright (Java)          |
 | API Automation    | RestAssured                |
 | Contract Testing  | JSON Schema Validation     |

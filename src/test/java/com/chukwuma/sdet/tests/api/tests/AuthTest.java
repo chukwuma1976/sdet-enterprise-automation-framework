@@ -73,7 +73,7 @@ class AuthTest extends BaseApiTest {
     @Description("Admin user should have admin role")
     void adminShouldHaveAdminRole() {
         int adminId = getFirstUserIdByRole("admin");
-        ApiUser admin = fetchUserById(adminId);
+        ApiUser admin = fetchUserById(adminId); // admin user
         String token = login(admin);
 
         given()

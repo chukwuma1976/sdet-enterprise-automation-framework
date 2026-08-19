@@ -1,0 +1,80 @@
+INSERT INTO user_roles
+    (id, name, display_name)
+VALUES
+    (1, 'Admin', 'Admin'),
+    (2, 'ESS', 'ESS');
+
+-- employees deduplicated by emp_number (several users share the same employee record)
+INSERT INTO employees
+    (emp_number, employee_id, first_name, middle_name, last_name, termination_id)
+VALUES
+    (7, '305730761', 'Jack', 'Mannelli', 'Checcucci', NULL),
+    (118, '09557', 'Emily', '', 'Jones', NULL),
+    (174, '9786', 'Leatha', 'Matthew', 'Connelly', NULL),
+    (173, 'JB1070', 'James', 'T', 'Brown', NULL),
+    (175, 'JB1949', 'James', 'T', 'Brown', NULL),
+    (196, 'JB1679', 'James', 'T', 'Brown', NULL),
+    (208, 'JB5217', 'James', 'T', 'Brown', NULL),
+    (187, 'JB3945', 'James', 'T', 'Brown', NULL),
+    (86, '0295', '99N75', '425', '5TlV', NULL),
+    (104, '0312', 'A8DCo', '4Ys', '010Z', NULL),
+    (155, '0360', 'aniket', 't', 't', NULL),
+    (163, '0367', 'Ash', 'J', 'Tyson', NULL),
+    (90, '0303', 'bala', 'kumar', 'ravi', NULL),
+    (83, '0292', 'bmrtahvwhibmrtahvwhi', '', 'hbfqkhjfqbhbfqkhjfqb', NULL),
+    (113, '0320', 'Charles', '', 'Carter', NULL),
+    (107, '00392', 'Charlotte', '', 'Smith', NULL),
+    (223, '0426', 'Random1', '', '1Random', NULL),
+    (137, '1234', 'Qwerty', 'Qwerty', 'LName', NULL),
+    (157, '1235', 'FName', 'Mname', 'LName', NULL),
+    (233, 'JB5533', 'James', 'T', 'Brown', NULL),
+    (256, 'JB4806', 'James', 'T', 'Brown', NULL),
+    (267, 'JB5325', 'James', 'T', 'Brown', NULL),
+    (247, 'JB8359', 'James', 'T', 'Brown', NULL),
+    (165, '0367010', 'Jobin', 'Mathew', 'Sam', NULL),
+    (181, '0384EMP001', 'John', '', 'Automation', NULL),
+    (182, '0384', 'Rajaa', '', 'P', NULL),
+    (22, '0087', 'Sania', '', 'Shaheen', NULL);
+
+INSERT INTO users
+    (id, user_name, deleted, status, emp_number, user_role_id)
+VALUES
+    (1, 'Admin', FALSE, TRUE, 7, 1),
+    (90, 'admin123456', FALSE, TRUE, 118, 1),
+    (71, 'Annalise.Olson', FALSE, FALSE, 174, 2),
+    (70, 'candidate_1787076144265', FALSE, TRUE, 173, 1),
+    (81, 'candidate_1787076813791', FALSE, TRUE, 175, 1),
+    (87, 'candidate_1787078082016', FALSE, TRUE, 175, 1),
+    (92, 'candidate_1787078572643', FALSE, TRUE, 173, 1),
+    (95, 'candidate_1787078919220', FALSE, TRUE, 196, 1),
+    (101, 'candidate_1787079449009', FALSE, TRUE, 208, 1),
+    (104, 'candidate_1787079796995', FALSE, TRUE, 187, 1),
+    (61, 'Cricket1', FALSE, TRUE, 86, 1),
+    (62, 'Cricket2', FALSE, TRUE, 104, 1),
+    (64, 'Cricket4', FALSE, TRUE, 155, 1),
+    (65, 'Cricket5', FALSE, TRUE, 163, 1),
+    (66, 'Cricket6', FALSE, TRUE, 90, 1),
+    (67, 'Cricket7', FALSE, TRUE, 83, 1),
+    (68, 'Cricket8', FALSE, TRUE, 113, 1),
+    (69, 'Cricket9', FALSE, TRUE, 107, 1),
+    (91, 'ess123', FALSE, TRUE, 223, 2),
+    (54, 'FMLName', FALSE, TRUE, 137, 2),
+    (55, 'FMLName1', FALSE, TRUE, 157, 2),
+    (88, 'jamesbrown3531', FALSE, TRUE, 233, 2),
+    (85, 'jamesbrown3757', FALSE, TRUE, 208, 2),
+    (100, 'jamesbrown3812', FALSE, FALSE, 256, 2),
+    (98, 'jamesbrown5425', FALSE, FALSE, 196, 2),
+    (58, 'jamesbrown5475', FALSE, TRUE, 173, 2),
+    (102, 'jamesbrown5584', FALSE, TRUE, 267, 2),
+    (97, 'jamesbrown6398', FALSE, TRUE, 247, 2),
+    (89, 'jamesbrown6909', FALSE, FALSE, 187, 2),
+    (99, 'jamesbrown7519', FALSE, TRUE, 256, 2),
+    (83, 'jamesbrown7985', FALSE, FALSE, 196, 2),
+    (94, 'jamesbrown8497', FALSE, FALSE, 175, 2),
+    (86, 'jamesbrown8601', FALSE, FALSE, 187, 2),
+    (73, 'jamesbrown9645', FALSE, FALSE, 175, 2),
+    (56, 'Jobinsam@6742', FALSE, TRUE, 165, 2),
+    (74, 'johnauto01', FALSE, TRUE, 181, 2),
+    (57, 'nicole.metz', FALSE, TRUE, 7, 2),
+    (75, 'Rajaa', FALSE, TRUE, 182, 2),
+    (96, 'sansha', FALSE, TRUE, 22, 1);
